@@ -91,7 +91,7 @@ AC_ARG_WITH(cross-tools,
 if test "${cross_compiling}" != yes ; then
 
    ASN1_COMPILE="\$(top_builddir)/lib/asn1/asn1_compile\$(EXEEXT)"
-   SLC="\$(top_builddir)/lib/sl/slc"
+   SLC="\$(top_builddir)/lib/sl/slc\$(EXEEXT)"
 
    ASN1_COMPILE_DEP="\$(ASN1_COMPILE)"
    SLC_DEP="\$(SLC)"

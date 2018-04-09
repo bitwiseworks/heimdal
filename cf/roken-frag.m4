@@ -705,6 +705,9 @@ AC_HAVE_TYPE([sa_family_t],[
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
+#ifdef __OS2__
+#include <sys/un.h>
+#endif
 #ifdef HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>
 #endif])

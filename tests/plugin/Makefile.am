@@ -15,7 +15,7 @@ do_subst = sed -e 's,[@]srcdir[@],$(srcdir),g' \
 	-e 's,[@]objdir[@],$(top_builddir)/tests/plugin,g' \
 	-e 's,[@]EGREP[@],$(EGREP),g' 
 
-LDADD = ../../lib/krb5/libkrb5.la $(LIB_roken)
+windc_la_LIBADD = ../../lib/krb5/libkrb5.la $(LIB_roken)
 
 check-pac: check-pac.in Makefile
 	$(do_subst) < $(srcdir)/check-pac.in > check-pac.tmp

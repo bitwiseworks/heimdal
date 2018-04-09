@@ -24,7 +24,7 @@ if versionscript
 libheimbase_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map
 endif
 
-libheimbase_la_LIBADD = $(PTHREAD_LIBADD)
+libheimbase_la_LIBADD = $(PTHREAD_LIBADD) $(LIB_libintl)
 
 include_HEADERS	= heimbase.h
 
