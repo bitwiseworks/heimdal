@@ -673,6 +673,8 @@ mdb_entry2value(krb5_context context, hdb_entry *entry, krb5_data *data)
 
 #if defined(HAVE_DB_185_H)
 #include <db_185.h>
+#elif defined(__OS2__)
+#include <db4/db_185.h>
 #elif defined(HAVE_DB_H)
 #include <db.h>
 #endif
