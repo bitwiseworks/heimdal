@@ -271,7 +271,7 @@ krb5_addlog_dest(krb5_context context, krb5_log_facility *f, const char *orig)
     int min = 0, max = -1, n;
     char c;
     const char *p = orig;
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
     const char *q;
 #endif
 
@@ -287,7 +287,7 @@ krb5_addlog_dest(krb5_context context, krb5_log_facility *f, const char *orig)
 	}
     }
     if(n){
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
 	q = strrchr(p, '\\');
 	if (q != NULL)
 	    p = q;

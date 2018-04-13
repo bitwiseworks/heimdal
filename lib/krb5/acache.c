@@ -108,6 +108,8 @@ init_ccapi(krb5_context context)
 	lib = "/System/Library/Frameworks/Kerberos.framework/Kerberos";
 #elif defined(KRB5_USE_PATH_TOKENS) && defined(_WIN32)
 	lib = "%{LIBDIR}/libkrb5_cc.dll";
+#elif defined(__OS2__)
+	lib = "/@unixroot/usr/lib/krb5_cc.dll";
 #else
 	lib = "/usr/lib/libkrb5_cc.so";
 #endif

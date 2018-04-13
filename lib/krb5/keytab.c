@@ -171,7 +171,7 @@ keytab_name(const char *name, const char **type, size_t *type_len)
 
     if (residual == NULL ||
 	ISPATHSEP(name[0])
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
         /* Avoid treating <drive>:<path> as a keytab type
          * specification */
         || name + 1 == residual

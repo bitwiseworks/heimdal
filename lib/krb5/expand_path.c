@@ -588,7 +588,7 @@ _krb5_expand_path_tokensv(krb5_context context,
 	}
     }
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined (__OS2__)
     /* Also deal with slashes */
     if (filepath && *ppath_out) {
 	char * c;

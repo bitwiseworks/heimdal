@@ -290,7 +290,7 @@ check_log(krb5_context context, const char *path, char *data)
     int min = 0, max = -1, n;
     char c;
     const char *p = data;
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
     const char *q;
 #endif
 
@@ -306,7 +306,7 @@ check_log(krb5_context context, const char *path, char *data)
 	}
     }
     if(n){
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
 	q = strrchr(p, '\\');
 	if (q != NULL)
 	    p = q;

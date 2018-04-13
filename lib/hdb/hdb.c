@@ -338,7 +338,7 @@ find_method (const char *filename, const char **rest)
     if (strncmp(filename, "/", sizeof("/") - 1) == 0
 	|| strncmp(filename, "./", sizeof("./") - 1) == 0
 	|| strncmp(filename, "../", sizeof("../") - 1) == 0
-#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
         || strncmp(filename, "\\\\", sizeof("\\\\") - 1)
         || (isalpha(filename[0]) && filename[1] == ':')
 #endif

@@ -51,7 +51,11 @@ SYSCONFDIR "/krb5.conf" PATH_SEP
 "%{COMMON_APPDATA}/Kerberos/krb5.conf" PATH_SEP
 "%{WINDOWS}/krb5.ini"
 #else /* _WIN32 */
+#ifdef __OS2__
+"/@unixroot/etc/krb5.conf"
+#else /* __OS2__ */
 "/etc/krb5.conf"
+#endif /* __OS2__ */
 #endif /* _WIN32 */
 #endif /* KRB5_DEFAULT_CONFIG_FILE */
 ;

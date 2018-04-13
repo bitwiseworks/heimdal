@@ -279,7 +279,7 @@ dcc_resolve(krb5_context context, krb5_ccache *id, const char *res)
 	char *q;
 
 	dc->dir = strdup(&res[1]);
-#ifdef _WIN32
+#if defined(_WIN32) || defined (__OS2__)
 	q = strrchr(dc->dir, '\\');
 	if (q == NULL)
 #endif

@@ -232,7 +232,7 @@ is_possible_path_name(const char * name)
     if ((colon = strchr(name, ':')) == NULL)
         return TRUE;
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
     /* <drive letter>:\path\to\cache ? */
 
     if (colon == name + 1 &&
@@ -1065,7 +1065,7 @@ krb5_cc_get_prefix_ops(krb5_context context, const char *prefix)
     if (ISPATHSEP(prefix[0]))
 	return &krb5_fcc_ops;
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(__OS2__)
     /* Is drive letter? */
     if (isalpha(prefix[0]) && prefix[1] == ':')
 	return &krb5_fcc_ops;
