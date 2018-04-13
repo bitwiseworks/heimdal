@@ -259,7 +259,11 @@ int k5dcematch(luid, pname, ccname, sizep, tgt)
     if (stbuf.st_uid != luid)
       return(1);
 
+#ifdef __OS2__
+    if ((fd = open(ccdata,O_RDONLY|O_BINARY)) == -1)
+#else
     if ((fd = open(ccdata,O_RDONLY)) == -1)
+#endif
       return(1);
 
     if ((read(fd,&status,4)) != 4) {

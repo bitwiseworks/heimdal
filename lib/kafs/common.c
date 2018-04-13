@@ -183,7 +183,11 @@ find_cells(const char *file, char ***cells, int *idx)
 	char *t;
 	t = cell + strlen(cell);
 	for (; t >= cell; t--)
+#ifdef __OS2__
+	  if (*t == '\n' || *t == '\t' || *t == ' ' || *t == '\r')
+#else
 	  if (*t == '\n' || *t == '\t' || *t == ' ')
+#endif
 	    *t = 0;
 	if (cell[0] == '\0' || cell[0] == '#')
 	    continue;
@@ -280,7 +284,11 @@ file_find_cell(struct kafs_data *data,
 	    if (buf[0] != '>')
 		continue; /* Not a cell name line, try next line */
 	    p = buf;
+#ifdef __OS2__
+	    strsep(&p, " \t\n\r#");
+#else
 	    strsep(&p, " \t\n#");
+#endif
 
 	    if (exact)
 		cmp = strcmp(buf + 1, cell);

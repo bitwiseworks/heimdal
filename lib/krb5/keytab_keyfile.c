@@ -90,7 +90,11 @@ get_cell_and_realm (krb5_context context, struct akf_data *d)
 				AFS_SERVERTHISCELL);
 	return EINVAL;
     }
+#ifdef __OS2__
+    buf[strcspn(buf, "\n\r")] = '\0';
+#else
     buf[strcspn(buf, "\n")] = '\0';
+#endif
     fclose(f);
 
     d->cell = strdup (buf);
@@ -108,7 +112,11 @@ get_cell_and_realm (krb5_context context, struct akf_data *d)
 				    AFS_SERVERMAGICKRBCONF);
 	    return EINVAL;
 	}
+#ifdef __OS2__
+	buf[strcspn(buf, "\n\r")] = '\0';
+#else
 	buf[strcspn(buf, "\n")] = '\0';
+#endif
 	fclose(f);
     }
     /* uppercase */

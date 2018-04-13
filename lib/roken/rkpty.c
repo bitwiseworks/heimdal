@@ -169,7 +169,11 @@ parse_configuration(const char *fn)
 
     while (fgets(s, sizeof(s),  cmd) != NULL) {
 
+#ifdef __OS2__
+	s[strcspn(s, "#\n\r")] = '\0';
+#else
 	s[strcspn(s, "#\n")] = '\0';
+#endif
 	lineno++;
 
 	c = calloc(1, sizeof(*c));

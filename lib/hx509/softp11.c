@@ -718,7 +718,11 @@ read_conf_file(const char *fn, CK_USER_TYPE userType, const char *pin)
     rk_cloexec_file(f);
 
     while(fgets(buf, sizeof(buf), f) != NULL) {
+#ifdef __OS2__
+	buf[strcspn(buf, "\n\r")] = '\0';
+#else
 	buf[strcspn(buf, "\n")] = '\0';
+#endif
 
 	st_logf("line: %s\n", buf);
 

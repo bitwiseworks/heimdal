@@ -604,7 +604,11 @@ load_crl(hx509_context context, const char *path, time_t *t, CRLCertificateList 
     
     *t = sb.st_mtime;
 	
+#ifdef __OS2__
+    if ((f = fopen(path, "rb")) == NULL)
+#else
     if ((f = fopen(path, "r")) == NULL)
+#endif
 	return errno;
 
     rk_cloexec_file(f);

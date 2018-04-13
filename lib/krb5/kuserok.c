@@ -285,13 +285,25 @@ check_one_file(krb5_context context,
 
     while (fgets(buf, sizeof(buf), f) != NULL) {
 	krb5_principal tmp;
+#ifdef __OS2__
+	char *newline = buf + strcspn(buf, "\n\r");
+#else
 	char *newline = buf + strcspn(buf, "\n");
+#endif
 
+#ifdef __OS2__
+	if (*newline != '\n' && *newline != '\r') {
+#else
 	if (*newline != '\n') {
+#endif
 	    int c;
 	    c = fgetc(f);
 	    if (c != EOF) {
+#ifdef __OS2__
+		while (c != EOF && c != '\n' && c != '\r')
+#else
 		while (c != EOF && c != '\n')
+#endif
 		    c = fgetc(f);
 		/* line was too long, so ignore it */
 		continue;

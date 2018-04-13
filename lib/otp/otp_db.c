@@ -54,7 +54,11 @@ otp_db_open (void)
   for(i = 0; i < RETRIES; ++i) {
     struct stat statbuf;
 
+#ifdef __OS2__
+    lock = open (OTP_DB_LOCK, O_WRONLY | O_CREAT | O_EXCL | O_BINARY, 0666);
+#else
     lock = open (OTP_DB_LOCK, O_WRONLY | O_CREAT | O_EXCL, 0666);
+#endif
     if (lock >= 0) {
       close(lock);
       break;

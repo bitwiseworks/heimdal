@@ -33,7 +33,11 @@
 
 #include "kadmin_locl.h"
 
+#ifdef __OS2__
+#define WORDS_FILENAME "/@unixroot/usr/share/dict/words"
+#else
 #define WORDS_FILENAME "/usr/share/dict/words"
+#endif
 
 #define NUSERS 1000
 
@@ -48,7 +52,11 @@ read_words (const char *filename, char ***ret_w)
     char **w = NULL;
     char *wbuf = NULL, *wptr = NULL, *wend = NULL;
 
+#ifdef __OS2__
+    f = fopen (filename, "rb");
+#else
     f = fopen (filename, "r");
+#endif
     if (f == NULL)
 	err (1, "cannot open %s", filename);
     alloc = n = 0;

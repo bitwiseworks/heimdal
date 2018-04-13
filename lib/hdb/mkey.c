@@ -303,7 +303,11 @@ hdb_read_master_key(krb5_context context, const char *filename,
     if(filename == NULL)
 	filename = HDB_DB_DIR "/m-key";
 
+#ifdef __OS2__
+    f = fopen(filename, "rb");
+#else
     f = fopen(filename, "r");
+#endif
     if(f == NULL) {
 	int save_errno = errno;
 	krb5_set_error_message(context, save_errno, "failed to open %s: %s",

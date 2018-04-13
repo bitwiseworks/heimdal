@@ -96,7 +96,11 @@ fetch_acl (kadm5_server_context *context,
 	krb5_principal this_princ;
 	unsigned flags = 0;
 
+#ifdef __OS2__
+	p = strtok_r(buf, " \t\n\r", &foo);
+#else
 	p = strtok_r(buf, " \t\n", &foo);
+#endif
 	if(p == NULL)
 	    continue;
 	if (*p == '#')		/* comment */

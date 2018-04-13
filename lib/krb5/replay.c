@@ -132,7 +132,11 @@ krb5_rc_initialize(krb5_context context,
 		   krb5_rcache id,
 		   krb5_deltat auth_lifespan)
 {
+#ifdef __OS2__
+    FILE *f = fopen(id->name, "wb");
+#else
     FILE *f = fopen(id->name, "w");
+#endif
     struct rc_entry tmp;
     int ret;
 
@@ -214,7 +218,11 @@ krb5_rc_store(krb5_context context,
 
     ent.stamp = time(NULL);
     checksum_authenticator(rep, ent.data);
+#ifdef __OS2__
+    f = fopen(id->name, "rb");
+#else
     f = fopen(id->name, "r");
+#endif
     if(f == NULL) {
 	char buf[128];
 	ret = errno;
@@ -246,7 +254,11 @@ krb5_rc_store(krb5_context context,
 	return ret;
     }
     fclose(f);
+#ifdef __OS2__
+    f = fopen(id->name, "ab");
+#else
     f = fopen(id->name, "a");
+#endif
     if(f == NULL) {
 	char buf[128];
 	rk_strerror_r(errno, buf, sizeof(buf));
@@ -271,7 +283,11 @@ krb5_rc_get_lifespan(krb5_context context,
 		     krb5_rcache id,
 		     krb5_deltat *auth_lifespan)
 {
+#ifdef __OS2__
+    FILE *f = fopen(id->name, "rb");
+#else
     FILE *f = fopen(id->name, "r");
+#endif
     int r;
     struct rc_entry ent;
     r = fread(&ent, sizeof(ent), 1, f);

@@ -108,7 +108,11 @@ main(int argc, char **argv)
 
     printf("kdc replay\n");
 
+#ifdef __OS2__
+    fd = open(argv[1], O_RDONLY|O_BINARY);
+#else
     fd = open(argv[1], O_RDONLY);
+#endif
     if (fd < 0)
 	err(1, "open: %s", argv[1]);
 

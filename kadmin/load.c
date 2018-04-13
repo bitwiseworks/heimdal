@@ -421,7 +421,11 @@ doit(const char *filename, int mergep)
     hdb_entry_ex ent;
     HDB *db = _kadm5_s_get_db(kadm_handle);
 
+#ifdef __OS2__
+    f = fopen(filename, "rb");
+#else
     f = fopen(filename, "r");
+#endif
     if (f == NULL) {
 	krb5_warn(context, errno, "fopen(%s)", filename);
 	return 1;

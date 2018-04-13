@@ -1454,7 +1454,11 @@ _kdc_pk_mk_pa_reply(krb5_context context,
 	    ocsp.expire = 0;
 	    ocsp.next_update = kdc_time + 60 * 5;
 
+#ifdef __OS2__
+	    fd = open(config->pkinit_kdc_ocsp_file, O_RDONLY | O_BINARY);
+#else
 	    fd = open(config->pkinit_kdc_ocsp_file, O_RDONLY);
+#endif
 	    if (fd < 0) {
 		kdc_log(context, config, 0,
 			"PK-INIT failed to open ocsp data file %d", errno);
@@ -1867,7 +1871,11 @@ load_mappings(krb5_context context, const char *fn)
     unsigned long lineno = 0;
     FILE *f;
 
+#ifdef __OS2__
+    f = fopen(fn, "rb");
+#else
     f = fopen(fn, "r");
+#endif
     if (f == NULL)
 	return;
 

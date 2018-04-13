@@ -269,7 +269,11 @@ _open_db(char *fn, int flags, int mode, int *fd)
     int op;
     int ret;
 
+#ifdef __OS2__
+    *fd = open(fn, flags|O_BINARY, mode);
+#else
     *fd = open(fn, flags, mode);
+#endif
     if (*fd == -1)
 	return NULL;
 

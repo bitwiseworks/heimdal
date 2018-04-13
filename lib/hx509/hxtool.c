@@ -217,7 +217,11 @@ cms_verify_sd(struct cms_verify_sd_options *opt, int argc, char **argv)
 	pd.os = &co;
 	pd.detached_data = 0;
 
+#ifdef __OS2__
+	f = fopen(argv[0], "rb");
+#else
 	f = fopen(argv[0], "r");
+#endif
 	if (f == NULL)
 	    err(1, "Failed to open file %s", argv[0]);
 
@@ -483,7 +487,11 @@ cms_create_sd(struct cms_create_sd_options *opt, int argc, char **argv)
 		hx509_err(context, 1, ret, "print signer");
 	}
 
+#ifdef __OS2__
+	f = fopen(outfile, "wb");
+#else
 	f = fopen(outfile, "w");
+#endif
 	if (f == NULL)
 	    err(1, "open %s", outfile);
 
@@ -1104,7 +1112,11 @@ ocsp_fetch(struct ocsp_fetch_options *opt, int argc, char **argv)
     {
 	FILE *f;
 
+#ifdef __OS2__
+	f = fopen(file, "wb");
+#else
 	f = fopen(file, "w");
+#endif
 	if (f == NULL)
 	    abort();
 

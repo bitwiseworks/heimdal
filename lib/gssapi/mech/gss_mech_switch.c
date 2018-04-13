@@ -30,7 +30,11 @@
 #include <heim_threads.h>
 
 #ifndef _PATH_GSS_MECH
+#ifdef __OS2__
+#define _PATH_GSS_MECH	"/@unixroot/etc/gss/mech"
+#else
 #define _PATH_GSS_MECH	"/etc/gss/mech"
+#endif
 #endif
 
 struct _gss_mech_switch_list _gss_mechs = { NULL } ;
@@ -256,7 +260,11 @@ _gss_load_mech(void)
 	add_builtin(__gss_ntlm_initialize());
 
 #ifdef HAVE_DLOPEN
+#ifdef __OS2__
+	fp = fopen(_PATH_GSS_MECH, "rb");
+#else
 	fp = fopen(_PATH_GSS_MECH, "r");
+#endif
 	if (!fp) {
 		HEIMDAL_MUTEX_unlock(&_gss_mech_mutex);
 		return;

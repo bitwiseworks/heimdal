@@ -1222,11 +1222,23 @@ err:
 	*fd_out = -1;
 
     if (for_write && excl)
+#ifdef __OS2__
+	fd = open(dbname, O_CREAT | O_EXCL | O_WRONLY | O_BINARY, 0600);
+#else
 	fd = open(dbname, O_CREAT | O_EXCL | O_WRONLY, 0600);
+#endif
     else if (for_write)
+#ifdef __OS2__
+	fd = open(dbname, O_CREAT | O_TRUNC | O_WRONLY | O_BINARY, 0600);
+#else
 	fd = open(dbname, O_CREAT | O_TRUNC | O_WRONLY, 0600);
+#endif
     else
+#ifdef __OS2__
+	fd = open(dbname, O_RDONLY | O_BINARY);
+#else
 	fd = open(dbname, O_RDONLY);
+#endif
     if (fd < 0) {
 	if (error != NULL)
 	    *error = heim_error_create(ret, N_("Could not open JSON file %s: %s", ""),

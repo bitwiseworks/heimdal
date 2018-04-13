@@ -2110,7 +2110,11 @@ _krb5_parse_moduli(krb5_context context, const char *file,
     while(fgets(buf, sizeof(buf), f) != NULL) {
 	struct krb5_dh_moduli *element;
 
+#ifdef __OS2__
+	buf[strcspn(buf, "\n\r")] = '\0';
+#else
 	buf[strcspn(buf, "\n")] = '\0';
+#endif
 	lineno++;
 
 	m2 = realloc(m, (n + 2) * sizeof(m[0]));

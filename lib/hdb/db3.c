@@ -330,7 +330,11 @@ _open_db(DB *d, char *fn, int myflags, int flags, mode_t mode, int *fd)
     int ret;
     int cache_size = (myflags & DB_RDONLY) ? RD_CACHE_SZ : WR_CACHE_SZ;
 
+#ifdef __OS2__
+    *fd = open(fn, flags|O_BINARY, mode);
+#else
     *fd = open(fn, flags, mode);
+#endif
 
     if (*fd == -1)
        return errno;

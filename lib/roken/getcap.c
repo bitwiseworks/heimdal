@@ -302,7 +302,11 @@ getent(char **cap, size_t *len, char **db_array, int fd,
 	    } else
 #endif
 	    {
+#ifdef __OS2__
+		fd = open(*db_p, O_RDONLY | O_BINARY, 0);
+#else
 		fd = open(*db_p, O_RDONLY, 0);
+#endif
 		if (fd < 0) {
 		    /* No error on unfound file. */
 		    continue;

@@ -3136,7 +3136,11 @@ _hx509_query_statistic(hx509_context context, int type, const hx509_query *q)
     FILE *f;
     if (context->querystat == NULL)
 	return;
+#ifdef __OS2__
+    f = fopen(context->querystat, "ab");
+#else
     f = fopen(context->querystat, "a");
+#endif
     if (f == NULL)
 	return;
     rk_cloexec_file(f);
@@ -3205,7 +3209,11 @@ hx509_query_unparse_stats(hx509_context context, int printtype, FILE *out)
 
     if (context->querystat == NULL)
 	return;
+#ifdef __OS2__
+    f = fopen(context->querystat, "rb");
+#else
     f = fopen(context->querystat, "r");
+#endif
     if (f == NULL) {
 	fprintf(out, "No statistic file %s: %s.\n",
 		context->querystat, strerror(errno));

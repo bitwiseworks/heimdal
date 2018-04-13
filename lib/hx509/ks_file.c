@@ -429,7 +429,11 @@ file_init_common(hx509_context context,
 	    *pnext++ = '\0';
 
 
+#ifdef __OS2__
+	if ((f = fopen(p, "rb")) == NULL) {
+#else
 	if ((f = fopen(p, "r")) == NULL) {
+#endif
 	    ret = ENOENT;
 	    hx509_set_error_string(context, 0, ret,
 				   "Failed to open PEM file \"%s\": %s",
@@ -572,7 +576,11 @@ file_store(hx509_context context,
     struct store_ctx sc;
     int ret;
 
+#ifdef __OS2__
+    sc.f = fopen(ksf->fn, "wb");
+#else
     sc.f = fopen(ksf->fn, "w");
+#endif
     if (sc.f == NULL) {
 	hx509_set_error_string(context, 0, ENOENT,
 			       "Failed to open file %s for writing");

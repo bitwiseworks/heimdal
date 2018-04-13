@@ -284,7 +284,11 @@ krb5_kdc_save_request(krb5_context context,
     d.length = len;
     t = _kdc_now.tv_sec;
 
+#ifdef __OS2__
+    fd = open(fn, O_WRONLY|O_CREAT|O_APPEND|O_BINARY, 0600);
+#else
     fd = open(fn, O_WRONLY|O_CREAT|O_APPEND, 0600);
+#endif
     if (fd < 0) {
 	int saved_errno = errno;
 	krb5_set_error_message(context, saved_errno, "Failed to open: %s", fn);

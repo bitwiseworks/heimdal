@@ -361,7 +361,11 @@ _bsearch_file_open(const char *fname, size_t max_sz, size_t page_sz,
     if (reads)
 	*reads = 0;
 
+#ifdef __OS2__
+    fd = open(fname, O_RDONLY|O_BINARY);
+#else
     fd = open(fname, O_RDONLY);
+#endif
     if (fd == -1)
 	return errno;
 

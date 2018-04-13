@@ -144,7 +144,11 @@ open_lock_file(krb5_context context, const char *db_name, int *fd)
 	return ENOMEM;
     }
 
+#ifdef __OS2__
+    *fd = open(lock_file, O_RDWR | O_CREAT | O_BINARY, 0600);
+#else
     *fd = open(lock_file, O_RDWR | O_CREAT, 0600);
+#endif
     free(lock_file);
     if(*fd < 0) {
 	int ret = errno;

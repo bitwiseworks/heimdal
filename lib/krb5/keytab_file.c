@@ -368,7 +368,11 @@ fkt_start_seq_get_int(krb5_context context,
     krb5_error_code ret;
     struct fkt_data *d = id->data;
 
+#ifdef __OS2__
+    c->fd = open (d->filename, flags|O_BINARY);
+#else
     c->fd = open (d->filename, flags);
+#endif
     if (c->fd < 0) {
 	ret = errno;
 	krb5_set_error_message(context, ret,

@@ -152,7 +152,11 @@ mit_prop_dump(void *arg, const char *file)
     krb5_data kdb_ent;
 
     memset(&ent, 0, sizeof (ent));
+#ifdef __OS2__
+    f = fopen(file, "rb");
+#else
     f = fopen(file, "r");
+#endif
     if (f == NULL)
 	return errno;
 
