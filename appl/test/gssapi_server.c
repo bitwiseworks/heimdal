@@ -275,7 +275,11 @@ proto (int sock, const char *service)
        printf("Delegated cred found\n");
 
        maj_stat = krb5_init_context(&context);
+#ifdef __OS2__
+       maj_stat = krb5_cc_resolve(context, "FILE:/@unixroot/var/tmp/krb5cc_test", &ccache);
+#else
        maj_stat = krb5_cc_resolve(context, "FILE:/tmp/krb5cc_test", &ccache);
+#endif
        maj_stat = gss_krb5_copy_ccache(&min_stat,
 				       delegated_cred_handle,
 				       ccache);

@@ -58,15 +58,27 @@ struct aud_rec;
 #include "roken.h"
 
 #ifndef _PATH_SHELLS
+#ifdef __OS2__
+#define _PATH_SHELLS "/@unixroot/etc/shells"
+#else
 #define _PATH_SHELLS "/etc/shells"
+#endif
 #endif
 
 #ifndef _PATH_BSHELL
+#ifdef __OS2__
+#define _PATH_BSHELL "/@unixroot/usr/bin/sh"
+#else
 #define _PATH_BSHELL "/bin/sh"
+#endif
 #endif
 
 #ifndef _PATH_CSHELL
+#ifdef __OS2__
+#define _PATH_CSHELL "/@unixroot/usr/bin/csh"
+#else
 #define _PATH_CSHELL "/bin/csh"
+#endif
 #endif
 
 /*

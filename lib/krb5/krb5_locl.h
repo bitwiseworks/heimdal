@@ -280,8 +280,13 @@ typedef struct krb5_context_data {
 } krb5_context_data;
 
 #ifndef KRB5_USE_PATH_TOKENS
+#ifdef __OS2__
+#define KRB5_DEFAULT_CCNAME_FILE "FILE:/@unixroot/var/tmp/krb5cc_%{uid}"
+#define KRB5_DEFAULT_CCNAME_DIR "DIR:/@unixroot/var/tmp/krb5cc_%{uid}_dir/"
+#else
 #define KRB5_DEFAULT_CCNAME_FILE "FILE:/tmp/krb5cc_%{uid}"
 #define KRB5_DEFAULT_CCNAME_DIR "DIR:/tmp/krb5cc_%{uid}_dir/"
+#endif
 #else
 #define KRB5_DEFAULT_CCNAME_FILE "FILE:%{TEMP}/krb5cc_%{uid}"
 #define KRB5_DEFAULT_CCNAME_DIR "DIR:%{TEMP}/krb5cc_%{uid}_dir/"

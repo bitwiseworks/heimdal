@@ -108,7 +108,11 @@ struct credentials {
 #ifdef KRB5_USE_PATH_TOKENS
 #define TKT_ROOT "%{TEMP}/tkt"
 #else
+#ifdef __OS2__
+#define TKT_ROOT "/@unixroot/var/tmp/tkt"
+#else
 #define TKT_ROOT "/tmp/tkt"
+#endif
 #endif
 #endif
 

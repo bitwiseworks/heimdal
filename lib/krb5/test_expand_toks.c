@@ -80,7 +80,11 @@ main(int argc, char **argv)
     if (ret)
 	errx (1, "krb5_init_context failed: %d", ret);
 
+#ifdef __OS2__
+    ret = _krb5_expand_path_tokensv(context, "/@unixroot/var/tmp/%{foo}/%{bar}%{baz}/x", 0,
+#else
     ret = _krb5_expand_path_tokensv(context, "/tmp/%{foo}/%{bar}%{baz}/x", 0,
+#endif
                                     &expanded,
                                     "foo", "abc",
                                     "bar", "dce",
@@ -92,7 +96,11 @@ main(int argc, char **argv)
 #ifdef _WIN32
 #define EXPANDED_SHOULD_BE "\\tmp\\abc\\dcefgh\\x"
 #else
+#ifdef __OS2__
+#define EXPANDED_SHOULD_BE "/@unixroot/var/tmp/abc/dcefgh/x"
+#else
 #define EXPANDED_SHOULD_BE "/tmp/abc/dcefgh/x"
+#endif
 #endif
 
     if (strcmp(expanded, EXPANDED_SHOULD_BE))

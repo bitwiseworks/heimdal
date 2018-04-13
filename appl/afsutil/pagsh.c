@@ -62,7 +62,11 @@ RCSID("$Id$");
 #include <getarg.h>
 
 #ifndef TKT_ROOT
+#ifdef __OS2__
+#define TKT_ROOT "/@unixroot/var/tmp/tkt"
+#else
 #define TKT_ROOT "/tmp/tkt"
+#endif
 #endif
 
 static int help_flag;
@@ -209,7 +213,11 @@ main(int argc, char **argv)
 	sh_args[0] = "sh";
 	sh_args[1] = "-c";
 	sh_args[2] = path;
+#ifdef __OS2__
+	execv ("/@unixroot/usr/bin/sh", sh_args);
+#else
 	execv ("/bin/sh", sh_args);
+#endif
     }
     err (1, "execvp");
 }

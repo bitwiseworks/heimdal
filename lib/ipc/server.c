@@ -1094,7 +1094,11 @@ heim_sipc_service_unix(const char *service,
     un.sun_family = AF_UNIX;
 
     snprintf(un.sun_path, sizeof(un.sun_path),
+#ifdef __OS2__
+	     "/@unixroot/var/run/.heim_%s-socket", service);
+#else
 	     "/var/run/.heim_%s-socket", service);
+#endif
     fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (fd < 0)
 	return errno;

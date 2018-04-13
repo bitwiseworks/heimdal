@@ -285,7 +285,11 @@ _expand_temp_folder(krb5_context context, PTYPE param, const char *postfix, char
     if (p)
 	*ret = strdup(p);
     else
+#ifdef __OS2__
+	*ret = strdup("/@unixroot/var/tmp");
+#else
 	*ret = strdup("/tmp");
+#endif
     if (*ret == NULL)
 	return krb5_enomem(context);
     return 0;

@@ -235,7 +235,11 @@ proto (int sock, const char *svc)
     if (tk_file.length != 1)
 	snprintf (ccname, sizeof(ccname), "%s", (char *)(tk_file.data));
     else
+#ifdef __OS2__
+	snprintf (ccname, sizeof(ccname), "FILE:/@unixroot/var/tmp/krb5cc_%lu",
+#else
 	snprintf (ccname, sizeof(ccname), "FILE:/tmp/krb5cc_%lu",
+#endif
 		  (unsigned long)pwd->pw_uid);
 
     status = krb5_cc_resolve (context, ccname, &ccache);

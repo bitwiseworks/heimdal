@@ -859,7 +859,11 @@ HandleOP(AcquirePKInitCreds)
 {
     int32_t flags;
     krb5_data pfxdata;
+#ifdef __OS2__
+    char fn[] = "FILE:/@unixroot/var/tmp/pkcs12-creds-XXXXXXX";
+#else
     char fn[] = "FILE:/tmp/pkcs12-creds-XXXXXXX";
+#endif
     int fd;
 
     ret32(c, flags);

@@ -499,7 +499,11 @@ fortuna_reseed(void)
 	if ((*hc_rand_timer_method.bytes)(u.buf, sizeof(u.buf)) == 1)
 	    add_entropy(&main_state, u.buf, sizeof(u.buf));
 	/* add /etc/shadow */
+#ifdef __OS2__
+	fd = open("/@unixroot/etc/shadow", O_RDONLY | O_BINARY, 0);
+#else
 	fd = open("/etc/shadow", O_RDONLY, 0);
+#endif
 	if (fd >= 0) {
 	    ssize_t n;
 	    rk_cloexec(fd);

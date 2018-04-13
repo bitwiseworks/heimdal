@@ -83,16 +83,26 @@ check_config_file(krb5_context context, char *filelist, char **res, int def)
     return 0;
 }
 
+#ifdef __OS2__
+char *list0[] =  { "/@unixroot/var/tmp/foo", NULL };
+char *list1[] =  { "/@unixroot/var/tmp/foo", "/@unixroot/var/tmp/foo/bar", NULL };
+#else
 char *list0[] =  { "/tmp/foo", NULL };
 char *list1[] =  { "/tmp/foo", "/tmp/foo/bar", NULL };
+#endif
 char *list2[] =  { "", NULL };
 
 struct {
     char *fl;
     char **res;
 } test[] = {
+#ifdef __OS2__
+    { "/@unixroot/var/tmp/foo", NULL },
+    { "/@unixroot/var/tmp/foo" PATH_SEP "/@unixroot/var/tmp/foo/bar", NULL },
+#else
     { "/tmp/foo", NULL },
     { "/tmp/foo" PATH_SEP "/tmp/foo/bar", NULL },
+#endif
     { "", NULL }
 };
 

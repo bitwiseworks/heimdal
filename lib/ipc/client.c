@@ -352,7 +352,11 @@ common_path_init(const char *service,
 	return ENOMEM;
     s->fd = -1;
 
+#ifdef __OS2__
+    if (asprintf(&s->path, "/@unixroot/var/run/.heim_%s-%s", service, file) == -1) {
+#else
     if (asprintf(&s->path, "/var/run/.heim_%s-%s", service, file) == -1) {
+#endif
 	free(s);
 	return ENOMEM;
     }

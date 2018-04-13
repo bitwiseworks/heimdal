@@ -141,15 +141,27 @@
 #endif
 
 #ifndef _PATH_HEQUIV
+#ifdef __OS2__
+#define _PATH_HEQUIV "/@unixroot/etc/hosts.equiv"
+#else
 #define _PATH_HEQUIV "/etc/hosts.equiv"
+#endif
 #endif
 
 #ifndef _PATH_VARRUN
+#ifdef __OS2__
+#define _PATH_VARRUN "/@unixroot/var/run/"
+#else
 #define _PATH_VARRUN "/var/run/"
+#endif
 #endif
 
 #ifndef _PATH_BSHELL
+#ifdef __OS2__
+#define _PATH_BSHELL "/@unixroot/usr/bin/sh"
+#else
 #define _PATH_BSHELL "/bin/sh"
+#endif
 #endif
 
 #ifndef MAXPATHLEN

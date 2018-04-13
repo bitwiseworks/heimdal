@@ -181,32 +181,56 @@ krb5_error_code krb5_realm_of_cell (const char *cell, char **realm);
 #endif
 
 
+#ifdef __OS2__
+#define _PATH_VICE		"/@unixroot/usr/vice/etc/"
+#else
 #define _PATH_VICE		"/usr/vice/etc/"
+#endif
 #define _PATH_THISCELL 		_PATH_VICE "ThisCell"
 #define _PATH_CELLSERVDB 	_PATH_VICE "CellServDB"
 #define _PATH_THESECELLS	_PATH_VICE "TheseCells"
 
+#ifdef __OS2__
+#define _PATH_ARLA_VICE		"/@unixroot/usr/arla/etc/"
+#else
 #define _PATH_ARLA_VICE		"/usr/arla/etc/"
+#endif
 #define _PATH_ARLA_THISCELL	_PATH_ARLA_VICE "ThisCell"
 #define _PATH_ARLA_CELLSERVDB 	_PATH_ARLA_VICE "CellServDB"
 #define _PATH_ARLA_THESECELLS	_PATH_ARLA_VICE "TheseCells"
 
+#ifdef __OS2__
+#define _PATH_OPENAFS_DEBIAN_VICE		"/@unixroot/etc/openafs/"
+#else
 #define _PATH_OPENAFS_DEBIAN_VICE		"/etc/openafs/"
+#endif
 #define _PATH_OPENAFS_DEBIAN_THISCELL		_PATH_OPENAFS_DEBIAN_VICE "ThisCell"
 #define _PATH_OPENAFS_DEBIAN_CELLSERVDB 	_PATH_OPENAFS_DEBIAN_VICE "CellServDB"
 #define _PATH_OPENAFS_DEBIAN_THESECELLS		_PATH_OPENAFS_DEBIAN_VICE "TheseCells"
 
+#ifdef __OS2__
+#define _PATH_OPENAFS_MACOSX_VICE		"/@unixroot/var/db/openafs/etc/"
+#else
 #define _PATH_OPENAFS_MACOSX_VICE		"/var/db/openafs/etc/"
+#endif
 #define _PATH_OPENAFS_MACOSX_THISCELL		_PATH_OPENAFS_MACOSX_VICE "ThisCell"
 #define _PATH_OPENAFS_MACOSX_CELLSERVDB		_PATH_OPENAFS_MACOSX_VICE "CellServDB"
 #define _PATH_OPENAFS_MACOSX_THESECELLS		_PATH_OPENAFS_MACOSX_VICE "TheseCells"
 
+#ifdef __OS2__
+#define _PATH_ARLA_DEBIAN_VICE			"/@unixroot/etc/arla/"
+#else
 #define _PATH_ARLA_DEBIAN_VICE			"/etc/arla/"
+#endif
 #define _PATH_ARLA_DEBIAN_THISCELL		_PATH_ARLA_DEBIAN_VICE "ThisCell"
 #define _PATH_ARLA_DEBIAN_CELLSERVDB		_PATH_ARLA_DEBIAN_VICE "CellServDB"
 #define _PATH_ARLA_DEBIAN_THESECELLS		_PATH_ARLA_DEBIAN_VICE "TheseCells"
 
+#ifdef __OS2__
+#define _PATH_ARLA_OPENBSD_VICE			"/@unixroot/etc/afs/"
+#else
 #define _PATH_ARLA_OPENBSD_VICE			"/etc/afs/"
+#endif
 #define _PATH_ARLA_OPENBSD_THISCELL		_PATH_ARLA_OPENBSD_VICE "ThisCell"
 #define _PATH_ARLA_OPENBSD_CELLSERVDB		_PATH_ARLA_OPENBSD_VICE "CellServDB"
 #define _PATH_ARLA_OPENBSD_THESECELLS		_PATH_ARLA_OPENBSD_VICE "TheseCells"

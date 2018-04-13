@@ -37,11 +37,19 @@
 #define __SU_PATH_H
 
 #ifndef _PATH_DEFPATH
+#ifdef __OS2__
+#define _PATH_DEFPATH "/@unixroot/usr/bin;/@unixroot/bin"
+#else
 #define _PATH_DEFPATH "/usr/bin:/bin"
+#endif
 #endif
 
 #ifndef _PATH_BSHELL
+#ifdef __OS2__
+#define _PATH_BSHELL "/@unixroot/usr/bin/sh"
+#else
 #define _PATH_BSHELL "/bin/sh"
+#endif
 #endif
 
 #ifndef _PATH_ETC_ENVIRONMENT

@@ -64,7 +64,11 @@ typedef struct krb5_scache {
 #ifdef KRB5_USE_PATH_TOKENS
 #define KRB5_SCACHE_DB	"%{TEMP}/krb5scc_%{uid}"
 #else
+#ifdef __OS2__
+#define KRB5_SCACHE_DB	"/@unixroot/var/tmp/krb5scc_%{uid}"
+#else
 #define KRB5_SCACHE_DB	"/tmp/krb5scc_%{uid}"
+#endif
 #endif
 #define KRB5_SCACHE_NAME	"SCC:"  SCACHE_DEF_NAME ":" KRB5_SCACHE_DB
 

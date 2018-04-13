@@ -728,7 +728,11 @@ main(argc, argv)
 
 #ifdef DEBUG
   close(2);
+#ifdef __OS2__
+  open("/@unixroot/var/tmp/k5dce.debug",O_WRONLY|O_CREAT|O_APPEND, 0600);
+#else
   open("/tmp/k5dce.debug",O_WRONLY|O_CREAT|O_APPEND, 0600);
+#endif
 #endif
 
   if (myuid = getuid()) {

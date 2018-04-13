@@ -48,8 +48,13 @@
  *
  */
 
+#ifdef __OS2__
+#define AFS_SERVERTHISCELL "/@unixroot/usr/afs/etc/ThisCell"
+#define AFS_SERVERMAGICKRBCONF "/@unixroot/usr/afs/etc/krb.conf"
+#else
 #define AFS_SERVERTHISCELL "/usr/afs/etc/ThisCell"
 #define AFS_SERVERMAGICKRBCONF "/usr/afs/etc/krb.conf"
+#endif
 
 struct akf_data {
     uint32_t num_entries;

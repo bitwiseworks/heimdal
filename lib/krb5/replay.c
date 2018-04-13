@@ -102,7 +102,11 @@ krb5_rc_resolve_full(krb5_context context,
 KRB5_LIB_FUNCTION const char* KRB5_LIB_CALL
 krb5_rc_default_name(krb5_context context)
 {
+#ifdef __OS2__
+    return "FILE:/@unixroot/var/run/default_rcache";
+#else
     return "FILE:/var/run/default_rcache";
+#endif
 }
 
 KRB5_LIB_FUNCTION const char* KRB5_LIB_CALL

@@ -41,7 +41,11 @@ static int help_flag	= 0;
 #ifdef KRB5_USE_PATH_TOKENS
 #define TEST_CC_NAME "%{TEMP}/krb5-cc-test-foo"
 #else
+#ifdef __OS2__
+#define TEST_CC_NAME "/@unixroot/var/tmp/krb5-cc-test-foo"
+#else
 #define TEST_CC_NAME "/tmp/krb5-cc-test-foo"
+#endif
 #endif
 
 static void
@@ -745,11 +749,19 @@ main(int argc, char **argv)
     test_move(context, krb5_cc_type_dcc);
 #endif
 
+#ifdef __OS2__
+    test_prefix_ops(context, "FILE:/@unixroot/var/tmp/foo", &krb5_fcc_ops);
+#else
     test_prefix_ops(context, "FILE:/tmp/foo", &krb5_fcc_ops);
+#endif
     test_prefix_ops(context, "FILE", &krb5_fcc_ops);
     test_prefix_ops(context, "MEMORY", &krb5_mcc_ops);
     test_prefix_ops(context, "MEMORY:foo", &krb5_mcc_ops);
+#ifdef __OS2__
+    test_prefix_ops(context, "/@unixroot/var/tmp/kaka", &krb5_fcc_ops);
+#else
     test_prefix_ops(context, "/tmp/kaka", &krb5_fcc_ops);
+#endif
 #ifdef HAVE_SCC
     test_prefix_ops(context, "SCC:", &krb5_scc_ops);
     test_prefix_ops(context, "SCC:foo", &krb5_scc_ops);
@@ -763,7 +775,11 @@ main(int argc, char **argv)
     krb5_cc_destroy(context, id2);
 
     test_cc_config(context, "MEMORY", "bar", 1000);  /* 1000 because fast */
+#ifdef __OS2__
+    test_cc_config(context, "FILE", "/@unixroot/var/tmp/foocc", 30); /* 30 because slower */
+#else
     test_cc_config(context, "FILE", "/tmp/foocc", 30); /* 30 because slower */
+#endif
 
     krb5_free_context(context);
 

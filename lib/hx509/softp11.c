@@ -841,7 +841,11 @@ get_config_file_for_user(void)
 	    if (ret == -1)
 		fn = NULL;
         } else
+#ifdef __OS2__
+            fn = strdup("/@unixroot/etc/soft-token.rc");
+#else
             fn = strdup("/etc/soft-token.rc");
+#endif
     }
 #else  /* Windows */
 

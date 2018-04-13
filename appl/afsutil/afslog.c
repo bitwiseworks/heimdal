@@ -110,7 +110,11 @@ expand_cell_name(const char *cell)
 				_PATH_ARLA_DEBIAN_CELLSERVDB,
 				NULL };
     for(fn = fns; *fn; fn++) {
+#ifdef __OS2__
+	f = fopen(*fn, "rb");
+#else
 	f = fopen(*fn, "r");
+#endif
 	if(f == NULL)
 	    continue;
 	c = expand_one_file(f, cell);
