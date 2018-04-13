@@ -60,6 +60,8 @@ texi_subst = sed -e 's,[@]dbdir[@],$(localstatedir),g' \
 
 vars.texi: vars.tin Makefile
 	$(texi_subst) < $(srcdir)/vars.tin > vars.texi.tmp
+	sed -e 's,/@unixroot,/@@unixroot,g' < vars.texi.tmp > vars.texi.tmp2
+	mv vars.texi.tmp2 vars.texi.tmp
 	chmod +x vars.texi.tmp
 	mv vars.texi.tmp vars.texi
 
