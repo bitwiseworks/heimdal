@@ -34,6 +34,7 @@
 command = {
 	name = "klist"
 	name = "list"
+	name = "heimdal-klist"
 	help = "List kerberos tickets"
 	option = {
 		long = "cache"
@@ -136,6 +137,7 @@ command = {
 command = {
 	name = "kswitch"
 	name = "switch"
+	name = "heimdal-kswitch"
 	help = "Switch default kerberos cache"
 	option = {
 		long = "type"

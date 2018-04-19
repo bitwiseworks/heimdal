@@ -1122,9 +1122,11 @@ start_kdc(krb5_context context,
     if (max_kdcs < 1)
 	max_kdcs = 1;
 
-    pids = calloc(max_kdcs, sizeof(*pids));
+    pids = malloc(max_kdcs * sizeof(*pids));
     if (!pids)
 	krb5_err(context, 1, errno, "malloc");
+    for (i = 0; i < max_kdcs; i++)
+        pids[i] = (pid_t)-1;
 
     /*
      * We open a socketpair of which we hand one end to each of our kids.
@@ -1132,7 +1134,7 @@ start_kdc(krb5_context context,
      * on their end and be able to cleanly exit.
      */
 
-    if (socketpair(PF_LOCAL, SOCK_STREAM, 0, islive) == -1)
+    if (socketpair(PF_UNIX, SOCK_STREAM, 0, islive) == -1)
 	krb5_errx(context, 1, "socketpair");
     socket_set_nonblocking(islive[1], 1);
 #endif
@@ -1196,8 +1198,8 @@ start_kdc(krb5_context context,
                 sleep(10);
                 break;
             default:
-                for (i=0; i < max_kdcs; i++) {
-                    if (pids[i] == 0) {
+                for (i = 0; i < max_kdcs; i++) {
+                    if (pids[i] == (pid_t)-1) {
                         pids[i] = pid;
                         break;
                     }
