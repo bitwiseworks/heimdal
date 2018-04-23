@@ -67,6 +67,7 @@ endif
 
 lib_LTLIBRARIES = libhdb.la $(ldap_so)
 libhdb_la_LDFLAGS = -version-info 11:0:2
+libhdb_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libhdb_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

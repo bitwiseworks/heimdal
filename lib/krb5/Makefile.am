@@ -252,6 +252,7 @@ libkrb5_la_DEPENDENCIES =			\
 	version-script.map
 
 libkrb5_la_LDFLAGS = -version-info 26:0:0
+libkrb5_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libkrb5_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

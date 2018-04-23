@@ -8,6 +8,7 @@ AM_CPPFLAGS += $(ROKEN_RENAME)
 
 lib_LTLIBRARIES = libasn1.la
 libasn1_la_LDFLAGS = -version-info 8:0:0
+libasn1_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 noinst_LTLIBRARIES = libasn1base.la
 

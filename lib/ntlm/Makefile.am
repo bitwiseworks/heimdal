@@ -13,6 +13,7 @@ dist_libheimntlm_la_SOURCES = ntlm.c heimntlm.h
 nodist_libheimntlm_la_SOURCES = ntlm_err.c
 
 libheimntlm_la_LDFLAGS = -version-info 1:0:1
+libheimntlm_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libheimntlm_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

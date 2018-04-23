@@ -10,6 +10,7 @@ lib_LTLIBRARIES = libroken.la
 
 libroken_la_LDFLAGS = -version-info 19:0:1
 libroken_la_CPPFLAGS = -DBUILD_ROKEN_LIB
+libroken_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libroken_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

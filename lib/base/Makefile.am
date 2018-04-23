@@ -17,6 +17,7 @@ lib_LTLIBRARIES = libheimbase.la
 check_PROGRAMS = test_base
 
 libheimbase_la_LDFLAGS = -version-info 1:0:0
+libheimbase_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 TESTS = test_base
 

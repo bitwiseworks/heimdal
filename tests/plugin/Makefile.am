@@ -30,6 +30,7 @@ lib_LTLIBRARIES = windc.la
 
 windc_la_SOURCES = windc.c
 windc_la_LDFLAGS = -module
+windc_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 CLEANFILES= \
 	$(TESTS) \

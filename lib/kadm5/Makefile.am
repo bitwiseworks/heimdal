@@ -6,7 +6,9 @@ libkadm5srv_la_CPPFLAGS = -I$(srcdir)/../krb5
 
 lib_LTLIBRARIES = libkadm5srv.la libkadm5clnt.la
 libkadm5srv_la_LDFLAGS = -version-info 8:1:0
+libkadm5srv_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 libkadm5clnt_la_LDFLAGS = -version-info 7:1:0
+libkadm5clnt_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libkadm5clnt_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script-client.map

@@ -42,6 +42,7 @@ libkafs_la_LIBADD = $(DEPLIB_krb5) $(LIBADD_roken)
 
 lib_LTLIBRARIES = libkafs.la
 libkafs_la_LDFLAGS = -version-info 5:1:5
+libkafs_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 foodir = $(libdir)
 foo_DATA = $(AFS_EXTRA_LIBS)
 # EXTRA_DATA = afslib.so

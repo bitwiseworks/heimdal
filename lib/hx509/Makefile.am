@@ -4,6 +4,7 @@ AM_CPPFLAGS += $(INCLUDE_openssl_crypto)
 
 lib_LTLIBRARIES = libhx509.la
 libhx509_la_LDFLAGS = -version-info 5:0:0
+libhx509_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 BUILT_SOURCES =				\
 	sel-gram.h			\

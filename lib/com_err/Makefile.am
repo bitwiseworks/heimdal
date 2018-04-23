@@ -6,6 +6,7 @@ YFLAGS = -d
 
 lib_LTLIBRARIES = libcom_err.la
 libcom_err_la_LDFLAGS = -version-info 2:3:1
+libcom_err_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libcom_err_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

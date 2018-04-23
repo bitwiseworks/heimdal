@@ -14,6 +14,7 @@ include_HEADERS = sl.h
 
 lib_LTLIBRARIES = libsl.la
 libsl_la_LDFLAGS = -version-info 2:1:2
+libsl_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 libsl_la_LIBADD = @LIB_readline@
 

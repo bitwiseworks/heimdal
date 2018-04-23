@@ -67,6 +67,7 @@ ALL_OBJECTS += $(digest_service_OBJECTS)
 $(ALL_OBJECTS): $(KDC_PROTOS)
 
 libkdc_la_LDFLAGS = -version-info 2:0:0
+libkdc_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 if versionscript
 libkdc_la_LDFLAGS += $(LDFLAGS_VERSION_SCRIPT)$(srcdir)/version-script.map

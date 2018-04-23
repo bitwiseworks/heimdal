@@ -50,6 +50,7 @@ nodist_include_HEADERS = wind_err.h
 $(libwind_la_OBJECTS): wind_err.h
 
 libwind_la_LDFLAGS = -version-info 0:0:0
+libwind_la_LDFLAGS += -buildlevel '$(BUILDLEVEL_INFO)'
 
 libwind_la_LIBADD = \
 	$(LIB_roken) \

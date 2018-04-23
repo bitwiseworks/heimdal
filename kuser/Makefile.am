@@ -90,6 +90,6 @@ EXTRA_DIST = NTMakefile $(man_MANS) \
 
 # make sure install-exec-hook doesn't have any commands in Makefile.am.common
 install-exec-hook:
-	(cd $(DESTDIR)$(bindir) && rm -f klist && $(LN_S) heimtools klist)
-	(cd $(DESTDIR)$(bindir) && rm -f kswitch && $(LN_S) heimtools kswitch)
+	(cd $(DESTDIR)$(bindir) && rm -f klist && $(LN_S) $(bindir)/heimtools$(EXEEXT) klist)
+	(cd $(DESTDIR)$(bindir) && rm -f kswitch && $(LN_S) $(bindir)/heimtools$(EXEEXT) kswitch)
 
