@@ -19,7 +19,7 @@ dnl
 AC_DEFUN([EL_MANTYPE],
 [
    MANTYPE=
-   TestPath="/usr/bin${PATH_SEPARATOR}/usr/ucb"
+   TestPath="/@unixroot/usr/bin${PATH_SEPARATOR}/usr/bin${PATH_SEPARATOR}/usr/ucb"
    AC_PATH_PROGS(NROFF, nroff awf, /bin/false, $TestPath)
    if ${NROFF} -mdoc ${srcdir}/doc/editrc.5.roff >/dev/null 2>&1; then
       MANTYPE=mdoc

@@ -14,10 +14,10 @@ AC_INIT(libedit, [EL_RELEASE],, libedit-[EL_TIMESTAMP])
 AC_CONFIG_SRCDIR([src/el.c])
 AC_CONFIG_HEADER([config.h])
 
+AM_INIT_AUTOMAKE
 # features of Posix that are extensions to C (define _GNU_SOURCE)
 AC_USE_SYSTEM_EXTENSIONS
 
-AM_INIT_AUTOMAKE
 AC_PROG_LIBTOOL
 
 # libtool -version-info

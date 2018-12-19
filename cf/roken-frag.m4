@@ -228,6 +228,9 @@ AC_FIND_FUNC_NO_LIBS(getsockopt,,
 #endif
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#endif
+#ifdef __OS2__
+#include <libcx/net.h>
 #endif],
 [0,0,0,0,0])
 AC_FIND_FUNC_NO_LIBS(setsockopt,,
@@ -716,6 +719,9 @@ AC_HAVE_TYPE([socklen_t],[
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
 #endif
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
 #ifdef HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>
 #endif])
@@ -739,6 +745,9 @@ AC_HAVE_TYPE([struct addrinfo], [
 #include <sys/types.h>
 #ifdef HAVE_NETDB_H
 #include <netdb.h>
+#endif
+#ifdef __OS2__
+#include <libcx/net.h>
 #endif
 #ifdef HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>

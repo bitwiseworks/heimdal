@@ -8,6 +8,9 @@ AC_RUN_IFELSE([AC_LANG_SOURCE([[#include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#ifdef __OS2__
+#include <libcx/net.h>
+#endif
 
 int
 main(int argc, char **argv)

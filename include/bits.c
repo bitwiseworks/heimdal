@@ -158,6 +158,9 @@ int main(int argc, char **argv)
     fprintf(f, "#include <netinet/in6_machtypes.h>\n");
 #endif
 #ifdef HAVE_SOCKLEN_T
+#ifdef __OS2__
+    fprintf(f, "#include <libcx/net.h>\n");
+#endif
 #ifndef WIN32
     fprintf(f, "#include <sys/socket.h>\n");
 #else
