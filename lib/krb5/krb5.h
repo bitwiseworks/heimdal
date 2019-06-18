@@ -360,7 +360,7 @@ typedef AP_REQ krb5_ap_req;
 
 struct krb5_cc_ops;
 
-#if defined(_WIN32) || defined(__OS2__)
+#if defined(_WIN32)
 #define KRB5_USE_PATH_TOKENS 1
 #endif
 
