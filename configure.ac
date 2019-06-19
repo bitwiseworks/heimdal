@@ -585,6 +585,8 @@ AH_BOTTOM([#ifdef ROKEN_RENAME
 #include "roken_rename.h"
 #endif])
 
+rk_OS2
+
 AC_ARG_ENABLE(heimdal-documentation,
 	AS_HELP_STRING([--disable-heimdal-documentation],
 		[if you want disable to heimdal documentation]))
