@@ -66,13 +66,22 @@ read_string(const char *preprompt, const char *prompt,
     char *p;
     void (*oldsigintr)(int);
 
+#ifdef __OS2__
+    fprintf(stderr, "%s%s", preprompt, prompt);
+    fflush(stderr);
+#else
     _cprintf("%s%s", preprompt, prompt);
+#endif
 
     oldsigintr = signal(SIGINT, intr);
 
     p = buf;
     while(intr_flag == 0){
+#ifdef __OS2__
+	c = ((echo)? getche(): getch());
+#else
 	c = ((echo)? _getche(): _getch());
+#endif
 	if(c == '\n' || c == '\r')
 	    break;
 	if(of == 0)
