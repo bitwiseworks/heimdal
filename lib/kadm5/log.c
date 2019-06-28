@@ -566,7 +566,11 @@ log_open(kadm5_server_context *server_context, int lock_mode)
     int fd = -1;
     int lock_it = 0;
     int lock_nb = 0;
+#ifdef __OS2__
+    int oflags = O_RDWR | O_BINARY;
+#else
     int oflags = O_RDWR;
+#endif
     kadm5_ret_t ret;
     kadm5_log_context *log_context = &server_context->log_context;
 
