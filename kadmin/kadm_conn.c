@@ -192,8 +192,10 @@ wait_for_connection(krb5_context contextp,
     pgrp = getpid();
 
     /* systemd may cause setpgid to fail with EPERM */
+#ifndef __OS2__
     if(setpgid(0, pgrp) < 0 && errno != EPERM)
 	err(1, "setpgid");
+#endif
 
     signal(SIGTERM, terminate);
     signal(SIGINT, terminate);
