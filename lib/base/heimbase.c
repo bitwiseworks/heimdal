@@ -570,6 +570,11 @@ autorel_tls(void)
 	arp = calloc(1, sizeof(*arp));
 	if (arp == NULL)
 	    return NULL;
+#ifdef __OS2__
+/* not doing this is clearly a violate of standards!!!! */
+/* that it worked on nix is a sheer luck, as the structure is 0 there */
+	pthread_mutex_init(&arp->tls_mutex, NULL);
+#endif
 	HEIMDAL_setspecific(ar_key, arp, ret);
 	if (ret) {
 	    free(arp);
@@ -646,6 +651,11 @@ heim_auto_release_create(void)
 
     ar = _heim_alloc_object(&_heim_autorel_object, sizeof(struct heim_auto_release));
     if (ar) {
+#ifdef __OS2__
+/* not doing this is clearly a violate of standards!!!! */
+/* that it worked on nix is a sheer luck, as the structure is 0 there */
+	pthread_mutex_init(&ar->pool_mutex, NULL);
+#endif
 	HEIMDAL_MUTEX_lock(&tls->tls_mutex);
 	if (tls->head == NULL)
 	    tls->head = ar;
