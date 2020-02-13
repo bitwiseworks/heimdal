@@ -1515,7 +1515,7 @@ json_db_sync(void *db, heim_error_t *error)
     const char *json_text = NULL;
     int ret = 0;
     int fd = -1;
-#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
     int tries = 3;
 #endif
 
@@ -1534,7 +1534,7 @@ json_db_sync(void *db, heim_error_t *error)
     len = strlen(json_text);
     errno = 0;
 
-#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
     while (tries--) {
 	ret = open_file(heim_string_get_utf8(jsondb->dbname), 1, 0, &fd, error);
 	if (ret == 0)
@@ -1557,10 +1557,14 @@ json_db_sync(void *db, heim_error_t *error)
     if (ret)
 	return ret;
 
-#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
     ret = close(fd);
     if (ret)
+#ifdef __OS2__
+	return errno;
+#else
 	return GetLastError();
+#endif
 #else
     ret = rename(heim_string_get_utf8(jsondb->bkpname), heim_string_get_utf8(jsondb->dbname));
     if (ret == 0) {
