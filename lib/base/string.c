@@ -238,7 +238,11 @@ heim_string_t
 __heim_string_constant(const char *_str)
 {
     static HEIMDAL_MUTEX mutex = HEIMDAL_MUTEX_INITIALIZER;
+#ifdef __OS2__ // we need that, as else it traps. another sheer luck it runs else
+    static heim_base_once_t once = HEIM_BASE_ONCE_INIT;
+#else
     static heim_base_once_t once;
+#endif
     static heim_dict_t dict = NULL;
     heim_string_t s, s2;
 
