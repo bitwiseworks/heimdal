@@ -44,7 +44,11 @@ rk_dumpdata (const char *filename, const void *buf, size_t size)
 {
     int fd;
 
+#ifdef __OS2__
+    fd = open(filename, O_WRONLY|O_TRUNC|O_CREAT|O_BINARY, 0640);
+#else
     fd = open(filename, O_WRONLY|O_TRUNC|O_CREAT, 0640);
+#endif
     if (fd < 0)
 	return;
     net_write(fd, buf, size);
@@ -64,7 +68,11 @@ rk_undumpdata(const char *filename, void **buf, size_t *size)
 
     *buf = NULL;
 
+#ifdef __OS2__
+    fd = open(filename, O_RDONLY|O_BINARY, 0);
+#else
     fd = open(filename, O_RDONLY, 0);
+#endif
     if (fd < 0)
 	return errno;
     if (fstat(fd, &sb) != 0){
