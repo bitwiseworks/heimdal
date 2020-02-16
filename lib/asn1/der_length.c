@@ -269,7 +269,11 @@ der_length_oid (const heim_oid *k)
 }
 
 size_t
+#ifdef __OS2__
+der_length_generalized_time (const long long int *t)
+#else
 der_length_generalized_time (const time_t *t)
+#endif
 {
     heim_octet_string k;
     size_t ret;
@@ -281,7 +285,11 @@ der_length_generalized_time (const time_t *t)
 }
 
 size_t
+#ifdef __OS2__
+der_length_utctime (const long long int *t)
+#else
 der_length_utctime (const time_t *t)
+#endif
 {
     heim_octet_string k;
     size_t ret;

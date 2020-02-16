@@ -69,13 +69,21 @@ der_free_unsigned64 (uint64_t *u)
 }
 
 void
+#ifdef __OS2__
+der_free_generalized_time(long long int *t)
+#else
 der_free_generalized_time(time_t *t)
+#endif
 {
     *t = 0;
 }
 
 void
+#ifdef __OS2__
+der_free_utctime(long long int *t)
+#else
 der_free_utctime(time_t *t)
+#endif
 {
     *t = 0;
 }

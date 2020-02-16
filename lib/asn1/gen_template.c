@@ -88,7 +88,11 @@ sequence_symbol(const char *basename, const Type *t)
 static const char *
 time_symbol(const char *basename, const Type *t)
 {
+#ifdef __OS2__
+    return "long long int";
+#else
     return "time_t";
+#endif
 }
 
 static const char *

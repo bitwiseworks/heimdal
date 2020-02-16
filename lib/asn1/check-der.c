@@ -401,7 +401,11 @@ test_generalized_time (void)
 	{NULL, 15, "19700101000000Z", 		NULL },
 	{NULL, 15, "19851106210627Z", 		NULL }
     };
+#ifdef __OS2__
+    long long int values[] = {0, 500159187};
+#else
     time_t values[] = {0, 500159187};
+#endif
     int i, ret;
     int ntests = sizeof(tests) / sizeof(*tests);
 
@@ -413,7 +417,11 @@ test_generalized_time (void)
 	    errx(1, "malloc");
     }
 
+#ifdef __OS2__
+    ret = generic_test (tests, ntests, sizeof(long long int),
+#else
     ret = generic_test (tests, ntests, sizeof(time_t),
+#endif
 			(generic_encode)der_put_generalized_time,
 			(generic_length)der_length_generalized_time,
 			(generic_decode)der_get_generalized_time,
@@ -743,7 +751,11 @@ check_fail_generalized_time(void)
     };
     int ntests = sizeof(tests) / sizeof(*tests);
 
+#ifdef __OS2__
+    return generic_decode_fail(tests, ntests, sizeof(long long int),
+#else
     return generic_decode_fail(tests, ntests, sizeof(time_t),
+#endif
 			       (generic_decode)der_get_generalized_time);
 }
 
@@ -1027,7 +1039,11 @@ corner_generalized_time(void)
 {
     const char *str = "760520140000Z";
     size_t size;
+#ifdef __OS2__
+    long long int t;
+#else
     time_t t;
+#endif
     int ret;
 
     ret = der_get_generalized_time((const unsigned char*)str, strlen(str),

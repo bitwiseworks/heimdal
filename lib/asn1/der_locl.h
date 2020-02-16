@@ -55,8 +55,13 @@
 #include <der-private.h>
 #include "asn1-template.h"
 
+#ifdef __OS2__
+long long int _der_timegm (struct tm *);
+struct tm * _der_gmtime(long long int t, struct tm *);
+#else
 time_t _der_timegm (struct tm *);
 struct tm * _der_gmtime(time_t t, struct tm *);
+#endif
 size_t _heim_len_unsigned (unsigned);
 size_t _heim_len_int (int);
 

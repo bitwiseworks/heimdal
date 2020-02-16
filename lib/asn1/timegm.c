@@ -52,10 +52,18 @@ static const unsigned ndays[2][12] ={
  * valid in asn1 encodings.
  */
 
+#ifdef __OS2__
+long long int
+#else
 time_t
+#endif
 _der_timegm (struct tm *tm)
 {
+#ifdef __OS2__
+  long long int res = 0;
+#else
   time_t res = 0;
+#endif
   int i;
 
   /*
@@ -93,7 +101,11 @@ _der_timegm (struct tm *tm)
 }
 
 struct tm *
+#ifdef __OS2__
+_der_gmtime(long long int t, struct tm *tm)
+#else
 _der_gmtime(time_t t, struct tm *tm)
+#endif
 {
     time_t secday = t % (3600 * 24);
     time_t days = t / (3600 * 24);

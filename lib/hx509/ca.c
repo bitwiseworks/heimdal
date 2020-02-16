@@ -55,8 +55,13 @@ struct hx509_ca_tbs {
 	unsigned int domaincontroller:1;
 	unsigned int xUniqueID:1;
     } flags;
+#ifdef __OS2__
+    long long int notBefore;
+    long long int notAfter;
+#else
     time_t notBefore;
     time_t notAfter;
+#endif
     int pathLenConstraint; /* both for CA and Proxy */
     CRLDistributionPoints crldp;
     heim_bit_string subjectUniqueID;
@@ -135,7 +140,11 @@ hx509_ca_tbs_free(hx509_ca_tbs *tbs)
 int
 hx509_ca_tbs_set_notBefore(hx509_context context,
 			   hx509_ca_tbs tbs,
+#ifdef __OS2__
+			   long long int t)
+#else
 			   time_t t)
+#endif
 {
     tbs->notBefore = t;
     return 0;
@@ -156,7 +165,11 @@ hx509_ca_tbs_set_notBefore(hx509_context context,
 int
 hx509_ca_tbs_set_notAfter(hx509_context context,
 			   hx509_ca_tbs tbs,
+#ifdef __OS2__
+			   long long int t)
+#else
 			   time_t t)
+#endif
 {
     tbs->notAfter = t;
     return 0;
@@ -177,7 +190,11 @@ hx509_ca_tbs_set_notAfter(hx509_context context,
 int
 hx509_ca_tbs_set_notAfter_lifetime(hx509_context context,
 				   hx509_ca_tbs tbs,
+#ifdef __OS2__
+				   long long int delta)
+#else
 				   time_t delta)
+#endif
 {
     return hx509_ca_tbs_set_notAfter(context, tbs, time(NULL) + delta);
 }
@@ -1031,8 +1048,13 @@ ca_sign(hx509_context context,
     size_t size;
     int ret;
     const AlgorithmIdentifier *sigalg;
+#ifdef __OS2__
+    long long int notBefore;
+    long long int notAfter;
+#else
     time_t notBefore;
     time_t notAfter;
+#endif
     unsigned key_usage;
 
     sigalg = tbs->sigalg;

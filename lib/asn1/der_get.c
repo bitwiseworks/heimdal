@@ -463,7 +463,11 @@ der_get_heim_integer (const unsigned char *p, size_t len,
 }
 
 static int
+#ifdef __OS2__
+generalizedtime2time (const char *s, long long int *t)
+#else
 generalizedtime2time (const char *s, time_t *t)
+#endif
 {
     struct tm tm;
 
@@ -488,7 +492,11 @@ generalizedtime2time (const char *s, time_t *t)
 
 static int
 der_get_time (const unsigned char *p, size_t len,
+#ifdef __OS2__
+	      long long int *data, size_t *size)
+#else
 	      time_t *data, size_t *size)
+#endif
 {
     char *times;
     int e;
@@ -509,14 +517,22 @@ der_get_time (const unsigned char *p, size_t len,
 
 int
 der_get_generalized_time (const unsigned char *p, size_t len,
+#ifdef __OS2__
+			  long long int *data, size_t *size)
+#else
 			  time_t *data, size_t *size)
+#endif
 {
     return der_get_time(p, len, data, size);
 }
 
 int
 der_get_utctime (const unsigned char *p, size_t len,
+#ifdef __OS2__
+			  long long int *data, size_t *size)
+#else
 			  time_t *data, size_t *size)
+#endif
 {
     return der_get_time(p, len, data, size);
 }

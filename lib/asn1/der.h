@@ -102,6 +102,10 @@ struct asn1_template;
 
 int _heim_fix_dce(size_t reallen, size_t *len);
 int _heim_der_set_sort(const void *, const void *);
+#ifdef __OS2__
+int _heim_time2generalizedtime (long long int, heim_octet_string *, int);
+#else
 int _heim_time2generalizedtime (time_t, heim_octet_string *, int);
+#endif
 
 #endif /* __DER_H__ */

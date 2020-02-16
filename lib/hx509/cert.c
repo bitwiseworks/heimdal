@@ -1657,8 +1657,16 @@ _hx509_Time2time_t(const Time *t)
 {
     switch(t->element) {
     case choice_Time_utcTime:
+#ifdef __OS2__
+      if (t->u.utcTime > __INT_MAX)
+	  return __INT_MAX;
+#endif
 	return t->u.utcTime;
     case choice_Time_generalTime:
+#ifdef __OS2__
+      if (t->u.generalTime > __INT_MAX)
+	  return __INT_MAX;
+#endif
 	return t->u.generalTime;
     }
     return 0;

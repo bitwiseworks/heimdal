@@ -877,7 +877,11 @@ define_type (int level, const char *name, const char *basename, Type *t, int typ
     }
     case TGeneralizedTime:
 	space(level);
+#ifdef __OS2__
+	fprintf (headerfile, "long long int %s;\n", name);
+#else
 	fprintf (headerfile, "time_t %s;\n", name);
+#endif
 	break;
     case TGeneralString:
 	space(level);
@@ -946,7 +950,11 @@ define_type (int level, const char *name, const char *basename, Type *t, int typ
     }
     case TUTCTime:
 	space(level);
+#ifdef __OS2__
+	fprintf (headerfile, "long long int %s;\n", name);
+#else
 	fprintf (headerfile, "time_t %s;\n", name);
+#endif
 	break;
     case TUTF8String:
 	space(level);
