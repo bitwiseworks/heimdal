@@ -274,6 +274,7 @@ _krb5_erase_file(krb5_context context, const char *filename)
 	close(fd);
 	return ret;
     }
+#ifndef __OS2__
     if (unlink(filename) < 0) {
 	ret = errno;
 	_krb5_xunlock(context, fd);
@@ -283,6 +284,7 @@ _krb5_erase_file(krb5_context context, const char *filename)
 	    filename, strerror(ret));
         return ret;
     }
+#endif
     ret = fstat(fd, &sb2);
     if (ret < 0) {
 	ret = errno;
@@ -315,6 +317,14 @@ _krb5_erase_file(krb5_context context, const char *filename)
     }
     ret = _krb5_xunlock(context, fd);
     close(fd);
+#ifdef __OS2__
+    if (unlink(filename) < 0) {
+	ret = errno;
+	krb5_set_error_message(context, errno,
+	    N_("krb5_cc_destroy: unlinking \"%s\": %s", ""),
+	    filename, strerror(ret));
+    }
+#endif
     return ret;
 }
 
