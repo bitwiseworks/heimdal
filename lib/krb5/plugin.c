@@ -154,6 +154,13 @@ _krb5_plugin_find(krb5_context context,
 	    if (e->u.dso.dsohandle == NULL)
 		continue;
 	    sym = dlsym(e->u.dso.dsohandle, name);
+#ifdef __OS2__
+	    if (sym == NULL) {
+		char symbol[256] = {0};
+		snprintf(symbol, sizeof(symbol), "_%s", name);
+		sym = dlsym(e->u.dso.dsohandle, symbol);
+	    }
+#endif
 	    if (sym)
 		ret = add_symbol(context, list, sym);
 	    break;
