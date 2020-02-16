@@ -273,14 +273,22 @@ dcc_resolve(krb5_context context, krb5_ccache *id, const char *res)
 			       N_("malloc: out of memory", ""));
 	return KRB5_CC_NOMEM;
     }
-    
+
     /* check for explicit component */
     if (res[0] == ':') {
 	char *q;
 
 	dc->dir = strdup(&res[1]);
-#if defined(_WIN32) || defined (__OS2__)
+#if defined(_WIN32)
 	q = strrchr(dc->dir, '\\');
+	if (q == NULL)
+#elif defined(__OS2__) // we search for \\ and / whatever comes last
+	int x;
+	for (x = strlen(dc->dir); x > 0; x--)
+	    if (ISPATHSEP(dc->dir[x - 1])) {
+	      q = &dc->dir[x - 1];
+	      break;
+	    }
 	if (q == NULL)
 #endif
 	q = strrchr(dc->dir, '/');

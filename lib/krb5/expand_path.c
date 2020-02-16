@@ -592,7 +592,7 @@ _krb5_expand_path_tokensv(krb5_context context,
 	}
     }
 
-#if defined(_WIN32) || defined (__OS2__)
+#if defined(_WIN32)
     /* Also deal with slashes */
     if (filepath && *ppath_out) {
 	char * c;
@@ -600,6 +600,15 @@ _krb5_expand_path_tokensv(krb5_context context,
 	for (c = *ppath_out; *c; c++)
 	    if (*c == '/')
 		*c = '\\';
+    }
+#elif defined (__OS2__)
+    /* Also deal with slashes */
+    if (filepath && *ppath_out) {
+	char * c;
+
+	for (c = *ppath_out; *c; c++)
+	    if (*c == '\\')
+		*c = '/';
     }
 #endif
 
