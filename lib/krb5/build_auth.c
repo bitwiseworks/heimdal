@@ -124,7 +124,11 @@ _krb5_build_authenticator (krb5_context context,
     if (ret)
 	goto fail;
 
+#ifdef __OS2__ 
+    krb5_us_timeofday (context, (krb5_timestamp *)&auth.ctime, &auth.cusec);
+#else
     krb5_us_timeofday (context, &auth.ctime, &auth.cusec);
+#endif
 
     ret = krb5_auth_con_getlocalsubkey(context, auth_context, &auth.subkey);
     if(ret)

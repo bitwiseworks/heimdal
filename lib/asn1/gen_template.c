@@ -89,7 +89,7 @@ static const char *
 time_symbol(const char *basename, const Type *t)
 {
 #ifdef __OS2__
-    return "long long int";
+    return "int64_t";
 #else
     return "time_t";
 #endif

@@ -488,7 +488,11 @@ check_tgs_flags(krb5_context context,
 	}
 	et->flags.renewable = 1;
 	ALLOC(et->renew_till);
+#ifdef __OS2__
+	_kdc_fix_time((time_t **)&b->rtime);
+#else
 	_kdc_fix_time(&b->rtime);
+#endif
 	*et->renew_till = *b->rtime;
     }
     if(f.renew){
@@ -797,7 +801,11 @@ tgs_make_reply(krb5_context context,
     rep.msg_type = krb_tgs_rep;
 
     et.authtime = tgt->authtime;
+#ifdef __OS2__
+    _kdc_fix_time((time_t **)&b->till);
+#else
     _kdc_fix_time(&b->till);
+#endif
     et.endtime = min(tgt->endtime, *b->till);
     ALLOC(et.starttime);
     *et.starttime = kdc_time;

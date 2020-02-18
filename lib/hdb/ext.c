@@ -522,7 +522,11 @@ hdb_set_last_modified_by(krb5_context context, hdb_entry *entry,
     }
     ev->time = modtime;
     if (!ev->time)
+#ifdef __OS2__
+        time((time_t *)&ev->time);
+#else
         time(&ev->time);
+#endif
 
     entry->modified_by = ev;
     if (old_ev)

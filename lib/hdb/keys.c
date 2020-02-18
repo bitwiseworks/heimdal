@@ -316,7 +316,11 @@ hdb_add_current_keys_to_history(krb5_context context, hdb_entry *entry)
     memset(&newkeyset, 0, sizeof(newkeyset));
     newkeyset.keys = entry->keys;
     newkeyset.kvno = entry->kvno;
+#ifdef __OS2__
+    newkeyset.set_time = (KerberosTime *)&newtime;
+#else
     newkeyset.set_time = &newtime;
+#endif
 
     ret = add_HDB_Ext_KeySet(keys, &newkeyset);
     if (ret)

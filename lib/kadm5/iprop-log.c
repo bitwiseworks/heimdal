@@ -188,7 +188,11 @@ print_entry(kadm5_server_context *server_context,
 		strlcpy(t, "never", sizeof(t));
 	    } else {
 		strftime(t, sizeof(t), "%Y-%m-%d %H:%M:%S",
+#ifdef __OS2__
+			 localtime((time_t *)ent.valid_end));
+#else
 			 localtime(ent.valid_end));
+#endif
 	    }
 	    printf("    expires = %s\n", t);
 	}
@@ -197,7 +201,11 @@ print_entry(kadm5_server_context *server_context,
 		strlcpy(t, "never", sizeof(t));
 	    } else {
 		strftime(t, sizeof(t), "%Y-%m-%d %H:%M:%S",
+#ifdef __OS2__
+			 localtime((time_t *)ent.pw_end));
+#else
 			 localtime(ent.pw_end));
+#endif
 	    }
 	    printf("    password exp = %s\n", t);
 	}

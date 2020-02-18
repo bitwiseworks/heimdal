@@ -413,7 +413,11 @@ make_pa_enc_challange(krb5_context context, METHOD_DATA *md,
     int32_t usec;
     int usec2;
 
+#ifdef __OS2__
+    krb5_us_timeofday (context, (krb5_timestamp *)&p.patimestamp, &usec);
+#else
     krb5_us_timeofday (context, &p.patimestamp, &usec);
+#endif
     usec2         = usec;
     p.pausec      = &usec2;
 
@@ -2046,7 +2050,11 @@ _kdc_as_rep(kdc_request_t r,
 	    r->et.flags.invalid = 1;
 	    r->et.flags.postdated = 1; /* XXX ??? */
 	}
+#ifdef __OS2__
+	_kdc_fix_time((time_t **)&b->till);
+#else
 	_kdc_fix_time(&b->till);
+#endif
 	t = *b->till;
 
 	/* be careful not overflowing */

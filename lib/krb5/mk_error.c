@@ -59,7 +59,11 @@ krb5_mk_error_ext(krb5_context context,
     msg.msg_type = krb_error;
     msg.stime    = sec;
     msg.susec    = usec;
+#ifdef __OS2__
+    msg.ctime    = (KerberosTime *)client_time;
+#else
     msg.ctime    = client_time;
+#endif
     msg.cusec    = client_usec;
     /* Make sure we only send `protocol' error codes */
     if(error_code < KRB5KDC_ERR_NONE || error_code >= KRB5_ERR_RCSID) {

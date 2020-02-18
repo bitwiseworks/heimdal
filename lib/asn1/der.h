@@ -38,6 +38,12 @@
 
 #include <stdint.h>
 
+#ifdef __OS2__
+#define TIME_T int64_t
+#else
+#define TIME_T time_t
+#endif
+
 typedef enum {
     ASN1_C_UNIV = 0,
     ASN1_C_APPL = 1,
@@ -102,10 +108,6 @@ struct asn1_template;
 
 int _heim_fix_dce(size_t reallen, size_t *len);
 int _heim_der_set_sort(const void *, const void *);
-#ifdef __OS2__
-int _heim_time2generalizedtime (long long int, heim_octet_string *, int);
-#else
-int _heim_time2generalizedtime (time_t, heim_octet_string *, int);
-#endif
+int _heim_time2generalizedtime (TIME_T, heim_octet_string *, int);
 
 #endif /* __DER_H__ */

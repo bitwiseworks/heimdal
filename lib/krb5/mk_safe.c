@@ -71,7 +71,11 @@ krb5_mk_safe(krb5_context context,
     krb5_us_timeofday (context, &rdata.timestamp, &rdata.usec);
 
     if (auth_context->flags & KRB5_AUTH_CONTEXT_DO_TIME) {
+#ifdef __OS2__
+	s.safe_body.timestamp  = (KerberosTime *)&rdata.timestamp;
+#else
 	s.safe_body.timestamp  = &rdata.timestamp;
+#endif
 	s.safe_body.usec       = &rdata.usec;
     } else {
 	s.safe_body.timestamp  = NULL;

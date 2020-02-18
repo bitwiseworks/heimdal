@@ -246,7 +246,11 @@ parse_event(Event *ev, char *s)
 	return 0;
     memset(ev, 0, sizeof(*ev));
     p = strsep(&s, ":");
+#ifdef __OS2__
+    if(parse_time_string((time_t *)&ev->time, p) != 1)
+#else
     if(parse_time_string(&ev->time, p) != 1)
+#endif
 	return -1;
     p = strsep(&s, ":");
     ret = krb5_parse_name(context, p, &ev->principal);
@@ -297,7 +301,11 @@ parse_generation(char *str, GENERATION **gen)
     *gen = calloc(1, sizeof(**gen));
 
     p = strsep(&str, ":");
+#ifdef __OS2__
+    if(parse_time_string((time_t *)&(*gen)->time, p) != 1)
+#else
     if(parse_time_string(&(*gen)->time, p) != 1)
+#endif
 	return -1;
     p = strsep(&str, ":");
     if(sscanf(p, "%d", &v) != 1)
@@ -542,21 +550,33 @@ doit(const char *filename, int mergep)
             ret = 1;
 	    continue;
 	}
+#ifdef __OS2__
+	if (parse_time_string_alloc ((time_t **)&ent.entry.valid_start, e.valid_start) == -1) {
+#else
 	if (parse_time_string_alloc (&ent.entry.valid_start, e.valid_start) == -1) {
+#endif
 	    fprintf (stderr, "%s:%d:error parsing time (%s)\n",
 		     filename, lineno, e.valid_start);
 	    hdb_free_entry (context, &ent);
             ret = 1;
 	    continue;
 	}
+#ifdef __OS2__
+	if (parse_time_string_alloc ((time_t **)&ent.entry.valid_end,   e.valid_end) == -1) {
+#else
 	if (parse_time_string_alloc (&ent.entry.valid_end,   e.valid_end) == -1) {
+#endif
 	    fprintf (stderr, "%s:%d:error parsing time (%s)\n",
 		     filename, lineno, e.valid_end);
 	    hdb_free_entry (context, &ent);
             ret = 1;
 	    continue;
 	}
+#ifdef __OS2__
+	if (parse_time_string_alloc ((time_t **)&ent.entry.pw_end,      e.pw_end) == -1) {
+#else
 	if (parse_time_string_alloc (&ent.entry.pw_end,      e.pw_end) == -1) {
+#endif
 	    fprintf (stderr, "%s:%d:error parsing time (%s)\n",
 		     filename, lineno, e.pw_end);
 	    hdb_free_entry (context, &ent);
