@@ -355,6 +355,10 @@ _open_db(DB *d, char *fn, int myflags, int flags, mode_t mode, int *fd)
 	return ret;
     }
 
+#ifdef __OS2__
+    close(*fd);
+    *fd =-1;
+#endif
     d->set_cachesize(d, 0, cache_size, 0);
 
 #if (DB_VERSION_MAJOR > 4) || ((DB_VERSION_MAJOR == 4) && (DB_VERSION_MINOR >= 1))
