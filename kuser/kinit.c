@@ -496,11 +496,7 @@ get_new_tickets(krb5_context context,
 	if (strcasecmp("STDIN", password_file) == 0)
 	    f = stdin;
 	else
-#ifdef __OS2__
-	    f = fopen(password_file, "rb");
-#else
 	    f = fopen(password_file, "r");
-#endif
 	if (f == NULL) {
 	    krb5_warnx(context, "Failed to open the password file %s",
 		       password_file);
@@ -515,7 +511,11 @@ get_new_tickets(krb5_context context,
 	}
 	if (f != stdin)
 	    fclose(f);
+#ifdef __OS2__
+	passwd[strcspn(passwd, "\r\n")] = '\0';
+#else
 	passwd[strcspn(passwd, "\n")] = '\0';
+#endif
     }
 
 #ifdef __APPLE__
