@@ -41,7 +41,9 @@
 #ifdef WIN32
 #define dup2 _dup2
 #endif
-
+#ifdef __OS2__
+#define pipe(A) socketpair(AF_UNIX, SOCK_STREAM, 0, A)
+#endif
 static int pipefds[2] = {-1, -1};
 
 ROKEN_LIB_FUNCTION void ROKEN_LIB_CALL
@@ -173,7 +175,7 @@ roken_detach_finish(const char *dir, int daemon_child_fd)
     if (pipefds[1] == -1)
         return;
 
-#ifdef HAVE_SETSID
+#if defined(HAVE_SETSID) && !defined(__OS2__)
     if (setsid() == -1)
         err(1, "failed to detach from tty");
 #endif
