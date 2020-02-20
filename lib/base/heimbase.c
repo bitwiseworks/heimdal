@@ -573,7 +573,7 @@ autorel_tls(void)
 #ifdef __OS2__
 /* not doing this is clearly a violate of standards!!!! */
 /* that it worked on nix is a sheer luck, as the structure is 0 there */
-	pthread_mutex_init(&arp->tls_mutex, NULL);
+	HEIMDAL_MUTEX_init(&arp->tls_mutex);
 #endif
 	HEIMDAL_setspecific(ar_key, arp, ret);
 	if (ret) {
@@ -654,7 +654,7 @@ heim_auto_release_create(void)
 #ifdef __OS2__
 /* not doing this is clearly a violate of standards!!!! */
 /* that it worked on nix is a sheer luck, as the structure is 0 there */
-	pthread_mutex_init(&ar->pool_mutex, NULL);
+	HEIMDAL_MUTEX_init(&ar->pool_mutex);
 #endif
 	HEIMDAL_MUTEX_lock(&tls->tls_mutex);
 	if (tls->head == NULL)

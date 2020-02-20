@@ -271,6 +271,11 @@ _gsskrb5_import_cred(OM_uint32 * minor_status,
     krb5_cc_get_principal(context, id, &handle->principal);
     handle->ccache = id;
     handle->cred_flags = flags;
+#ifdef __OS2__
+/* not doing this is clearly a violate of standards!!!! */
+/* that it worked on nix is a sheer luck, as the structure is 0 there */
+    HEIMDAL_MUTEX_init(&handle->cred_id_mutex);
+#endif
 
     *cred_handle = (gss_cred_id_t)handle;
 
