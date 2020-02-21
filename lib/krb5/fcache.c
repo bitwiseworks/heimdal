@@ -303,11 +303,13 @@ _krb5_erase_file(krb5_context context, const char *filename)
 
     /* there are still hard links to this file */
 
+#ifndef __OS2__
     if (sb2.st_nlink != 0) {
 	_krb5_xunlock(context, fd);
         close(fd);
         return 0;
     }
+#endif
 
     ret = scrub_file(fd);
     if (ret) {
