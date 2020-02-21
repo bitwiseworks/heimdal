@@ -686,6 +686,9 @@ main(int argc, char **argv)
     }
 
     if (client_password) {
+#ifdef __OS2__
+	client_password[strcspn(client_password, "\r\n")] = '\0';
+#endif
 	credential_data.value = client_password;
 	credential_data.length = strlen(client_password);
     }
