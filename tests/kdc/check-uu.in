@@ -103,7 +103,7 @@ ${kinit2} --password-file=${objdir}/foopassword user2@$R || \
 
 
 echo "starting uu server (using user1)"
-KRB5CCNAME=$cache1 ${uu_server} > uuserver.log &
+KRB5CCNAME=$cache1 ${uu_server} | tr -d '\r' > uuserver.log &
 uuspid=$!
 sleep 5
 

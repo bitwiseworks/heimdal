@@ -270,7 +270,7 @@ sed 's/lt-kadmin:/kadmin:/' < kadmin.tmp > kadmin2.tmp
 mv kadmin2.tmp kadmin.tmp
 
 # If client tried IPv6, but service only listened on IPv4
-grep -v ': connect' kadmin.tmp > kadmin2.tmp
+grep -v ': connect' kadmin.tmp | tr -d '\r'> kadmin2.tmp
 mv kadmin2.tmp kadmin.tmp
 
 cmp kadmin.tmp ${srcdir}/donotexists.txt || \
