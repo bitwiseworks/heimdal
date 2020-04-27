@@ -54,6 +54,9 @@ struct map_page {
 };
 
 /* #undef HAVE_MMAP */
+#if defined(__OS2__) && defined(HAVE_MMAP)
+#undef HAVE_MMAP
+#endif
 
 void *
 map_alloc(enum map_type type, const void *buf,
