@@ -40,7 +40,7 @@ objdir="@objdir@"
 KRB5_CONFIG="${1-${objdir}/krb5.conf}"
 export KRB5_CONFIG
 
-testfailed="echo test failed; cat messages.log; exit 1"
+testfailed="echo test failed; cat messages.log; exit \$ec"
 
 # If there is no useful db support compiled in, disable test
 ${have_db} || exit 77
@@ -354,7 +354,7 @@ env ${HEIM_MALLOC_DEBUG} ${kpasswdd} --detach ||
 kpasswddpid=`getpid kpasswdd`
 
 
-trap "kill -9 ${kdcpid} ${kpasswddpid}; echo signal killing kdc kpasswdd; exit 1;" EXIT
+trap "kill -9 ${kdcpid} ${kpasswddpid}; echo signal killing kdc kpasswdd; exit \$ec;" EXIT
 
 ec=0
 
@@ -906,7 +906,7 @@ EOF
 
 echo "Checking client pw expire"; > messages.log
 ${rkpty} ${kinitpty} ${kinit} pw-expired@${R}|| \
-	{ ec=1 ; eval "${testfailed}"; }
+	{ ec=$? ; eval "${testfailed}"; }
 
 ${kdestroy}
 
