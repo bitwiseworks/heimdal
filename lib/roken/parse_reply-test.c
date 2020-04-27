@@ -42,6 +42,10 @@
 #include "roken.h"
 #include "resolve.h"
 
+#if defined(__OS2__) && defined(HAVE_MMAP)
+#undef HAVE_MMAP
+#endif
+
 struct dns_reply*
 parse_reply(const unsigned char *, size_t);
 

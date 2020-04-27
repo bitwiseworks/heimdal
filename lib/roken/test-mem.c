@@ -44,6 +44,9 @@
 #include "test-mem.h"
 
 /* #undef HAVE_MMAP */
+#if defined(__OS2__) && defined(HAVE_MMAP)
+#undef HAVE_MMAP
+#endif
 
 struct {
     void *start;
