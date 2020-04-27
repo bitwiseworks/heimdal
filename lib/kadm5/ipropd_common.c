@@ -37,6 +37,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #endif
+#ifdef __OS2__
+#define pipe(A) socketpair(AF_UNIX, SOCK_STREAM, 0, A)
+#endif
 
 sig_atomic_t exit_flag;
 
