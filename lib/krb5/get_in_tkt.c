@@ -51,11 +51,7 @@ make_pa_enc_timestamp(krb5_context context, PA_DATA *pa,
     int usec2;
     krb5_crypto crypto;
 
-#ifdef __OS2__
-    krb5_us_timeofday (context, (krb5_timestamp *)&p.patimestamp, &usec);
-#else
     krb5_us_timeofday (context, &p.patimestamp, &usec);
-#endif
     usec2         = usec;
     p.pausec      = &usec2;
 

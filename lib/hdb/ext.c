@@ -247,7 +247,7 @@ hdb_entry_get_pkinit_cert(const hdb_entry *entry, const HDB_Ext_PKINIT_cert **a)
 }
 
 krb5_error_code
-hdb_entry_get_pw_change_time(const hdb_entry *entry, time_t *t)
+hdb_entry_get_pw_change_time(const hdb_entry *entry, TIME_T *t)
 {
     const HDB_extension *ext;
 
@@ -263,7 +263,7 @@ hdb_entry_get_pw_change_time(const hdb_entry *entry, time_t *t)
 krb5_error_code
 hdb_entry_set_pw_change_time(krb5_context context,
 			     hdb_entry *entry,
-			     time_t t)
+			     TIME_T t)
 {
     HDB_extension ext;
 
@@ -523,7 +523,11 @@ hdb_set_last_modified_by(krb5_context context, hdb_entry *entry,
     ev->time = modtime;
     if (!ev->time)
 #ifdef __OS2__
-        time((time_t *)&ev->time);
+    {
+        time_t t;
+        time(&t);
+        ev->time = t;
+    }
 #else
         time(&ev->time);
 #endif

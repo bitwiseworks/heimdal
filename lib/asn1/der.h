@@ -38,10 +38,12 @@
 
 #include <stdint.h>
 
+#ifndef TIME_T
 #ifdef __OS2__
 #define TIME_T int64_t
 #else
 #define TIME_T time_t
+#endif
 #endif
 
 typedef enum {

@@ -297,7 +297,11 @@ kadm5_s_get_principal(void *server_handle,
     if (ret)
 	goto out;
     if(mask & KADM5_TL_DATA) {
+#ifdef __OS2__
+	krb5_timestamp last_pw_expire;
+#else
 	time_t last_pw_expire;
+#endif
 	const HDB_Ext_PKINIT_acl *acl;
 	const HDB_Ext_Aliases *aliases;
 

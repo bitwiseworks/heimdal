@@ -98,7 +98,11 @@ acquire_cred_with_password(OM_uint32 *minor_status,
     krb5_get_init_creds_opt *opt;
     krb5_ccache ccache = NULL;
     krb5_error_code kret;
+#ifdef __OS2__
+    krb5_timestamp now;
+#else
     time_t now;
+#endif
     OM_uint32 left;
 
     if (cred_usage == GSS_C_ACCEPT) {
@@ -199,7 +203,11 @@ acquire_initiator_cred(OM_uint32 *minor_status,
     krb5_error_code kret = 0;
     OM_uint32 left;
     time_t lifetime = 0;
+#ifdef __OS2__
+    krb5_timestamp now;
+#else
     time_t now;
+#endif
 
     memset(&cred, 0, sizeof(cred));
 

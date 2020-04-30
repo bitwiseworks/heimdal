@@ -309,6 +309,14 @@ extern krb5_kt_ops hdb_get_kt_ops;
 
 extern const int hdb_interface_version;
 
+#ifndef TIME_T
+#ifdef __OS2__
+#define TIME_T int64_t
+#else
+#define TIME_T time_t
+#endif
+#endif
+
 #include <hdb-protos.h>
 
 #endif /* __HDB_H__ */

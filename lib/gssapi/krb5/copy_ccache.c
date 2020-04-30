@@ -89,7 +89,11 @@ _gsskrb5_krb5_import_cred(OM_uint32 *minor_status,
     handle->usage = 0;
 
     if (id) {
+#ifdef __OS2__
+	krb5_timestamp now;
+#else
 	time_t now;
+#endif
 	OM_uint32 left;
 	char *str;
 

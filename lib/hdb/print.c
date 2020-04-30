@@ -381,7 +381,11 @@ entry2mit_string_int(krb5_context context, krb5_storage *sp, hdb_entry *ent)
     char *p;
     HDB_Ext_KeySet *hist_keys = NULL;
     HDB_extension *extp;
+#ifdef __OS2__
+    KerberosTime last_pw_chg = 0;
+#else
     time_t last_pw_chg = 0;
+#endif
     time_t exp = 0;
     time_t pwexp = 0;
     unsigned int max_life = 0;

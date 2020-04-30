@@ -515,7 +515,11 @@ hdb_unseal_keys_kvno(krb5_context context, HDB *db, krb5_kvno kvno,
     HDB_extension *ext;
     HDB_Ext_KeySet *hist_keys;
     Key *tmp_val;
+#ifdef __OS2__
+    KerberosTime tmp_set_time;
+#else
     time_t tmp_set_time;
+#endif
     unsigned int tmp_len;
     unsigned int kvno_diff = 0;
     krb5_kvno tmp_kvno;

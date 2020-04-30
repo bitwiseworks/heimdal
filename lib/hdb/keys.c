@@ -288,7 +288,11 @@ hdb_add_current_keys_to_history(krb5_context context, hdb_entry *entry)
     HDB_extension *ext;
     HDB_Ext_KeySet *keys;
     hdb_keyset newkeyset;
+#ifdef __OS2__
+    KerberosTime newtime;
+#else
     time_t newtime;
+#endif
 
     if (entry->keys.len == 0)
 	return 0; /* nothing to do */
@@ -316,11 +320,7 @@ hdb_add_current_keys_to_history(krb5_context context, hdb_entry *entry)
     memset(&newkeyset, 0, sizeof(newkeyset));
     newkeyset.keys = entry->keys;
     newkeyset.kvno = entry->kvno;
-#ifdef __OS2__
-    newkeyset.set_time = (KerberosTime *)&newtime;
-#else
     newkeyset.set_time = &newtime;
-#endif
 
     ret = add_HDB_Ext_KeySet(keys, &newkeyset);
     if (ret)

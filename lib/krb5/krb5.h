@@ -405,8 +405,13 @@ typedef struct Principal *krb5_principal;
 typedef const struct Principal *krb5_const_principal;
 typedef struct Principals *krb5_principals;
 
+#ifdef __OS2__
+typedef int64_t krb5_timestamp;
+typedef int64_t krb5_deltat;
+#else
 typedef time_t krb5_deltat;
 typedef time_t krb5_timestamp;
+#endif
 
 typedef struct krb5_times {
   krb5_timestamp authtime;

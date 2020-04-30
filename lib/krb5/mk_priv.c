@@ -69,11 +69,7 @@ krb5_mk_priv(krb5_context context,
     krb5_us_timeofday (context, &rdata.timestamp, &rdata.usec);
 
     if (auth_context->flags & KRB5_AUTH_CONTEXT_DO_TIME) {
-#ifdef __OS2__
-	part.timestamp = (KerberosTime *)&rdata.timestamp;
-#else
 	part.timestamp = &rdata.timestamp;
-#endif
 	part.usec      = &rdata.usec;
     } else {
 	part.timestamp = NULL;
