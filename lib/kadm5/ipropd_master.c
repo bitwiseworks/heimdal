@@ -491,12 +491,14 @@ send_complete (krb5_context context, slave *s, const char *database,
     }
 
     for (;;) {
+#ifndef __OS2__
 	ret = flock(fd, LOCK_SH);
 	if (ret == -1) {
 	    ret = errno;
 	    krb5_warn(context, ret, "flock(fd, LOCK_SH)");
 	    goto done;
 	}
+#endif
 
 	if (krb5_storage_seek(dump, 0, SEEK_SET) == (off_t)-1) {
 	    ret = errno;
@@ -540,12 +542,14 @@ send_complete (krb5_context context, slave *s, const char *database,
 	 * our lock to a shared one.
 	 */
 
+#ifndef __OS2__
 	ret = flock(fd, LOCK_EX);
 	if (ret == -1) {
 	    ret = errno;
 	    krb5_warn(context, ret, "flock(fd, LOCK_EX)");
 	    goto done;
 	}
+#endif
 
 	ret = krb5_storage_seek(dump, 0, SEEK_SET);
 	if (ret == -1) {

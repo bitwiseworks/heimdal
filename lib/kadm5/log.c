@@ -606,6 +606,7 @@ log_open(kadm5_server_context *server_context, int lock_mode)
         }
         lock_it = (lock_mode != LOCK_UN);
     }
+#ifndef __OS2__
     if (lock_it && flock(fd, lock_mode | lock_nb) < 0) {
 	ret = errno;
 	krb5_set_error_message(server_context->context, ret,
@@ -614,6 +615,7 @@ log_open(kadm5_server_context *server_context, int lock_mode)
             (void) close(fd);
 	return ret;
     }
+#endif
 
     log_context->log_fd = fd;
     log_context->lock_mode = lock_mode;
