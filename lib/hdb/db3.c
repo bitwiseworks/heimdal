@@ -347,7 +347,11 @@ _open_db(DB *d, char *fn, int myflags, int flags, mode_t mode, int *fd)
      */
     myflags |= DB_FCNTL_LOCKING;
 
+#ifdef __OS2__
+    ret = 0;
+#else
     ret = flock(*fd, (myflags&DB_RDONLY) ? LOCK_SH : LOCK_EX);
+#endif
     if (ret == -1) {
 	ret = errno;
 	close(*fd);
